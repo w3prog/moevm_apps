@@ -1,0 +1,4 @@
+git+https://github.com/w3prog/moevmCommon
+git+https://github.com/w3prog/teacherPlan
+git+https://github.com/EvgeniyGor/StudentRecords
+git+https://github.com/dartl/IS_ScientificWork
