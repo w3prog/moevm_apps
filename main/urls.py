@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('teacherPlan.urls')),
     url(r'scientificWork^', include('scientificWork.urls')),
-#url(r'^\studentrecords', include('studentrecords.urls', namespace='studentrecords')),
+    url(r'studentrecords', include('studentrecords.urls', namespace='studentrecords')),
 ]
