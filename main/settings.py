@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'moevmCommon',
     'faker',
     'scientificWork',
-    'StudentRecords',
+    'studentrecords',
 ]
 
 MIDDLEWARE_CLASSES = (
