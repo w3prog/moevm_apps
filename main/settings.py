@@ -25,11 +25,11 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'djangotoolbox',
     'django_mongodb_engine',
-    'teacherPlan',
     'moevmCommon',
+    'teacherPlan',
     'faker',
-    'scientificWork',
-    'studentrecords',
+    # 'scientificWork',
+    # 'studentrecords',
 ]
 
 MIDDLEWARE_CLASSES = (

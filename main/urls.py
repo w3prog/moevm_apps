@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf.urls import include
-
+from .views import mainPage
 admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('teacherPlan.urls')),
-    url(r'scientificWork^', include('scientificWork.urls')),
-    url(r'studentrecords', include('studentrecords.urls', namespace='studentrecords')),
+    url(r'^teacherPlan', include('teacherPlan.urls')),
+    url(r'^$', mainPage)
+    #url(r'scientificWork^', include('scientificWork.urls')),
+    #url(r'studentrecords', include('studentrecords.urls', namespace='studentrecords')),
 ]

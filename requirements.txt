@@ -3,7 +3,8 @@ git+https://github.com/django-nonrel/djangotoolbox
 git+https://github.com/django-nonrel/mongodb-engine
 git+https://github.com/w3prog/moevmCommon
 git+https://github.com/w3prog/teacherPlan
-git+https://github.com/EvgeniyGor/StudentRecords
+
 git+https://github.com/dartl/IS_ScientificWork
 faker
 reportlab
+pisa
