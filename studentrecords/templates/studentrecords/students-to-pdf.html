@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+    <style type="text/css">
+        @page { size: A4; margin: 1cm; }
+        @font-face { font-family: TimesNewRoman; src: url(/home/nick1/mygit/StudentRecords/studentrecords/static/fonts/TimesNewRoman.ttf); }
+        body { font-size: 14px; line-height: 1em; font-family: TimesNewRoman; }
+        a { color: #FB9925; }
+        h3 { font-weight: bold; font-size: 18px; }
+        .fio{width: 450px;}
+        .group{width: 130px;}
+        .email{width: 400px;}
+        .gith{width: 150px;}
+        .stepic{width: 150px;}
+        p{margin: 20px}
+    </style>
+
+</head>
+<body>
+    <div>{{ article }}</div>
+
+    <table style="border: 1px solid black">
+        <tr style="padding-top: 5px;padding-bottom: 5px;">
+            <td class="fio">
+                <p>ФИО(FIO)</p>
+            </td>
+            <td class="group">
+                <p>Группа</p>
+            </td>
+            <td class="email">
+                <p>E-mail</p>
+            </td>
+            <td class="gith">
+                <p>Github</p>
+            </td>
+            <td class="stepic">
+                <p>Stepic</p>
+            </td>
+        </tr>
+        {% for student in students %}
+        <tr style="padding-top: 5px;padding-bottom: 5px;">
+            <td class="fio">
+                <p>
+                    {% if student.first_name  %}
+                    {{ student.first_name }}
+                    {% endif %}
+                    {% if student.last_name %}
+                    {{ student.last_name}}
+                    {% endif %}
+                    {% if student.patronymic %}
+                    {{ student.patronymic }}
+                    {% endif %}
+                </p>
+            </td>
+            <td class="group">
+                <p>
+                    {% if student.study_group %}
+                    {{ student.study_group }}
+                    {% else %}
+                    -
+                    {% endif %}
+                </p>
+            </td>
+            <td class="email">
+                <p>
+                    {% if student.email != None %}
+                    {{ student.email }}
+                    {% else %}
+                    -
+                    {% endif %}
+                </p>
+            </td>
+            <td class="gith">
+                <p>
+                    <a href="https://github.com/{{ user.github_id}}">Github</a>
+                </p>
+            </td>
+            <td class="stepic">
+                <p>
+                    <a href="https://stepik.org/users/{{ user.stepic_id }}">Stepic</a>
+                </p>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    {% if students == None %}
+    <div>Nothing is found</div>
+    {% endif %}
+</body>
+</html>

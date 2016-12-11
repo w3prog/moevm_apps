@@ -1,0 +1,403 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "id": "583d5605b179a919a410c440",
+      "username": "poker",
+      "first_name": "Антон",
+      "last_name": "Столетов",
+      "is_active": true,
+      "email": "poker@mail.ru",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-29 04:18:45",
+      "password": "pbkdf2_sha256$10000$tAjO8NABasTk$GdDxzfhVbS9mBFtTPxBQSbjYxvDguuZErLeiVGV4IvQ=",
+      "date_joined": "2016-11-29 04:18:45"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "id": "583d5634b179a919a410c451",
+      "username": "asdf",
+      "first_name": "Дмитрий",
+      "last_name": "Афанасьев",
+      "is_active": true,
+      "email": "asdf@mail.ru",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-29 07:19:32",
+      "password": "pbkdf2_sha256$10000$6yAS5XuIwpSY$QVa5bkwIQ4KJnKc8WNLlfKnInM7Yy05Qt5Q/ioszU8Q=",
+      "date_joined": "2016-11-29 07:19:32"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "id": "583d564eb179a919a410c45c",
+      "username": "temper",
+      "first_name": "Михаил",
+      "last_name": "Ефремов",
+      "is_active": true,
+      "email": "temper@mail.ru",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-29 07:19:58",
+      "password": "pbkdf2_sha256$10000$fYZYrwrmtHY4$VK595l2mtGQFlGVnz9uy7NwAhcZ3CPx1h9InWTX6zjQ=",
+      "date_joined": "2016-11-29 07:19:58"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "id": "583d5671b179a919a410c467",
+      "username": "inov",
+      "first_name": "Егор",
+      "last_name": "Скориков",
+      "is_active": true,
+      "email": "inov@mail.ru",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-29 07:20:33",
+      "password": "pbkdf2_sha256$10000$rOPjrdHQpkGB$SRm8pHw0ktYE325ZHD+HSeYbZvGLXAUiayPFjit4suw=",
+      "date_joined": "2016-11-29 07:20:33"
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 5,
+    "fields": {
+      "id": "583d573cb179a919a410c47b",
+      "user": "583d5605b179a919a410c440",
+      "github_id": "poker",
+      "study_group": "2303",
+      "election_date": "2016-11-01",
+      "stepic_id": "1",
+      "contract_date": "2016-10-01",
+      "academic_status": "a",
+      "birth_date": "2016-11-16",
+      "academic_degree": "n",
+      "academic_state": "s",
+      "year_of_academic_status": "2016-08-01",
+      "patronymic": "Витальевич",
+      "position": "Позиция",
+      "type": "s",
+      "year_of_academic_degree": "2017-01-31"
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 6,
+    "fields": {
+      "id": "583d57b0b179a919a410c4a8",
+      "user": "583d5634b179a919a410c451",
+      "github_id": "asdf",
+      "study_group": "2304",
+      "election_date": "2016-11-29",
+      "stepic_id": "541",
+      "contract_date": "2016-11-29",
+      "birth_date": "2016-11-09",
+      "academic_degree": "d",
+      "academic_state": "s",
+      "year_of_academic_status": "2016-11-29",
+      "patronymic": "Степанович",
+      "position": "темп",
+      "type": "h",
+      "academic_status": "a",
+      "year_of_academic_degree": "2016-11-29"
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 7,
+    "fields": {
+      "id": "583d57d4b179a919a410c4af",
+      "user": "583d564eb179a919a410c45c",
+      "github_id": "temper",
+      "study_group": "2303",
+      "election_date": "2016-11-29",
+      "stepic_id": "541",
+      "contract_date": "2016-11-29",
+      "birth_date": "2016-11-29",
+      "academic_degree": "t",
+      "academic_state": "d",
+      "year_of_academic_status": "2016-11-29",
+      "patronymic": "Михайлович",
+      "position": "Позиция",
+      "type": "t",
+      "academic_status": "a",
+      "year_of_academic_degree": "2016-11-29"
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 8,
+    "fields": {
+      "id": "583d580cb179a919a410c4b6",
+      "user": "583d5671b179a919a410c467",
+      "github_id": "inov",
+      "study_group": "2304",
+      "election_date": "2016-11-29",
+      "stepic_id": "541",
+      "contract_date": "2016-11-29",
+      "birth_date": "2016-11-29",
+      "academic_degree": "t",
+      "academic_state": "d",
+      "year_of_academic_status": "2016-11-29",
+      "patronymic": "Дмитриевич",
+      "position": "Позиция",
+      "type": "h",
+      "academic_status": "a",
+      "year_of_academic_degree": "2016-11-29"
+    }
+  },
+  {
+    "model": "scientificWork.Publication",
+    "pk": 9,
+    "fields": {
+      "id": "583d5bc9b179a90da8c4bf28",
+      "reiteration": "disposable",
+      "user": "583d573cb179a919a410c47b",
+      "typePublication": "guidelines",
+      "unitVolume": "страниц",
+      "publishingHouseName": "Изд-во СПбГЭТУ «ЛЭТИ»",
+      "number": null,
+      "volume": 253,
+      "edition": 1000,
+      "nameSbornik": "",
+      "place": "Санкт-Петербург",
+      "editor": "",
+      "date": "2004-11-15",
+      "isbn": "5-203-12232",
+      "type": "Учебное пособие",
+      "bookName": "Механика: Методические указания к самостоятельной работе и индивидуальным заданиям по физике"
+    }
+  },
+  {
+    "model": "scientificWork.Publication",
+    "pk": 10,
+    "fields": {
+      "id": "583d5c55b179a90da8c4bf2f",
+      "reiteration": "disposable",
+      "user": "583d57b0b179a919a410c4a8",
+      "typePublication": "book",
+      "unitVolume": "страниц",
+      "publishingHouseName": "Лениздат",
+      "number": null,
+      "volume": 216,
+      "edition": 15000,
+      "nameSbornik": "",
+      "place": "Санкт-Петербург",
+      "editor": "",
+      "date": "1985-11-29",
+      "isbn": "5-203-12232",
+      "type": "Историческая",
+      "bookName": "ЛЭТИ. История Ленинградского электротехнического института им. В. И. Ульянова (Ленина)"
+    }
+  },
+  {
+    "model": "scientificWork.Publication",
+    "pk": 11,
+    "fields": {
+      "id": "583d5d03b179a918fcf64a0c",
+      "reiteration": "disposable",
+      "user": "583d57d4b179a919a410c4af",
+      "typePublication": "collection",
+      "unitVolume": "страниц",
+      "publishingHouseName": "Изд-во СПбГЭТУ «ЛЭТИ»",
+      "number": 8,
+      "volume": 200,
+      "edition": 1800,
+      "nameSbornik": "Современное образование: содержание, технологии, качество",
+      "place": "Санкт-Петербург",
+      "editor": "Н.Н. Кузьмин",
+      "date": "2006-11-29",
+      "isbn": "5-7629-0720-1",
+      "type": "",
+      "bookName": ""
+    }
+  },
+  {
+    "model": "scientificWork.Publication",
+    "pk": 12,
+    "fields": {
+      "id": "583d5d4cb179a918fcf64a13",
+      "reiteration": "disposable",
+      "user": "583d580cb179a919a410c4b6",
+      "typePublication": "guidelines",
+      "unitVolume": "страниц",
+      "publishingHouseName": "Изд-во СП6ГЭТУ \"ЛЭТИ\"",
+      "number": null,
+      "volume": 46,
+      "edition": 500,
+      "nameSbornik": "",
+      "place": "Санкт-Петербург",
+      "editor": "",
+      "date": "2001-11-29",
+      "isbn": "5-7569-0345-2",
+      "type": "Лабораторные практики",
+      "bookName": "Оптические методы неразрушающего контроля"
+    }
+  },
+  {
+    "model": "scientificWork.Participation",
+    "pk": 13,
+    "fields": {
+      "id": "583d593ab179a919a410c4cb",
+      "user": "583d573cb179a919a410c47b",
+      "name": "Проблемы и перспективы развития экономики и управления",
+      "reiteration": "disposable",
+      "rank": "2",
+      "place": "ЛЭТИ",
+      "date": "2016-12-15",
+      "type": "conference"
+    }
+  },
+  {
+    "model": "scientificWork.Participation",
+    "pk": 14,
+    "fields": {
+      "id": "583d5951b179a919a410c4d2",
+      "user": "583d57b0b179a919a410c4a8",
+      "name": "Безопасность человека и общества как проблема социально-гуманитраных наук",
+      "reiteration": "repeating",
+      "rank": "3",
+      "place": "СПБГУ",
+      "date": "2016-11-10",
+      "type": "conference"
+    }
+  },
+  {
+    "model": "scientificWork.Participation",
+    "pk": 15,
+    "fields": {
+      "id": "583d59b6b179a919a410c4d9",
+      "user": "583d57d4b179a919a410c4af",
+      "name": "Практика коммуникативного поведения как объект социально-гуманитарных исследований",
+      "reiteration": "repeating",
+      "rank": "1",
+      "place": "Место издания",
+      "date": "2016-11-21",
+      "type": "seminar"
+    }
+  },
+  {
+    "model": "scientificWork.Participation",
+    "pk": 16,
+    "fields": {
+      "id": "583d59ecb179a919a410c4e0",
+      "user": "583d580cb179a919a410c4b6",
+      "name": "69-я Международная научно-практическая студенческая конференция",
+      "reiteration": "repeating",
+      "rank": "1",
+      "place": "РГАУ-МСХА имени К.А. Тимирязева",
+      "date": "2016-11-01",
+      "type": "seminar"
+    }
+  },
+  {
+    "model": "scientificWork.Rand",
+    "pk": 17,
+    "fields": {
+      "id": "583d5a73b179a90da8c4bef8",
+      "cipher": "1234",
+      "user": "583d573cb179a919a410c47b",
+      "name": "Разработка ключевых технологий в целях формирования НТЗ для развития семейств самолетов МС-21 и SSJ"
+    }
+  },
+  {
+    "model": "scientificWork.Rand",
+    "pk": 18,
+    "fields": {
+      "id": "583d5a80b179a90da8c4beff",
+      "cipher": "5234",
+      "user": "583d57b0b179a919a410c4a8",
+      "name": "Выполнение работ по аэродинамике, аэроакустике, системе управления и прочности конструкции"
+    }
+  },
+  {
+    "model": "scientificWork.Rand",
+    "pk": 19,
+    "fields": {
+      "id": "583d5a8db179a90da8c4bf06",
+      "cipher": "2254",
+      "user": "583d57d4b179a919a410c4af",
+      "name": "Разработка технологий, обеспечивающих проведение и сокращение сроков и стоимости летных испытаний"
+    }
+  },
+  {
+    "model": "scientificWork.Rand",
+    "pk": 20,
+    "fields": {
+      "id": "583d5a9ab179a90da8c4bf0d",
+      "cipher": "2345",
+      "user": "583d57b0b179a919a410c4a8",
+      "name": "Исследования аэродинамики, динамики полета, акустики и безопасности полета с целью разработки"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 21,
+    "fields": {
+      "id": "583d5605b179a919a410c441",
+      "username": "pokers",
+      "first_name": "Петр",
+      "last_name": "Столетов",
+      "is_active": true,
+      "email": "pokers@mail.ru",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-29 04:18:45",
+      "password": "pbkdf2_sha256$10000$tAjO8NABasTk$GdDxzfhVbS9mBFtTPxBQSbjYxvDguuZErLeiVGV4IvQ=",
+      "date_joined": "2016-11-29 04:18:45"
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 22,
+    "fields": {
+      "id": "583d573cb179a919a410c471",
+      "user": "583d5605b179a919a410c441",
+      "github_id": "poker1",
+      "study_group": "2303",
+      "election_date": "2016-11-01",
+      "stepic_id": "1",
+      "contract_date": "2016-10-01",
+      "academic_status": "a",
+      "birth_date": "2016-11-16",
+      "academic_degree": "n",
+      "academic_state": "s",
+      "year_of_academic_status": "2016-08-01",
+      "patronymic": "Витальевич",
+      "position": "Позиция",
+      "type": "s",
+      "year_of_academic_degree": "2017-01-31"
+    }
+  },
+  {
+    "model": "scientificWork.Publication",
+    "pk": 23,
+    "fields": {
+      "id": "583d5bc9b179a90da8c4bf22",
+      "reiteration": "disposable",
+      "user": "583d573cb179a919a410c471",
+      "typePublication": "guidelines",
+      "unitVolume": "страниц",
+      "publishingHouseName": "Изд-во СПбГЭТУ «ЛЭТИ»",
+      "number": null,
+      "volume": 253,
+      "edition": 1000,
+      "nameSbornik": "",
+      "place": "Санкт-Петербург",
+      "editor": "",
+      "date": "2004-11-15",
+      "isbn": "5-203-12232",
+      "type": "Учебное пособие",
+      "bookName": "sgdf"
+    }
+  }
+]

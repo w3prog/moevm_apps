@@ -1,0 +1,219 @@
+{% extends 'scientificWork/template_main.html' %}
+{% block title %}Публикации{% endblock %}
+{% block pagename %}Публикации{% endblock %}
+{% block content %}
+<div class="panel panel-default filter" id="panel_filter">
+    <div class="panel-heading">
+    	<a data-toggle="collapse" data-parent="#panel_filter" href="#collapseOne" class="display-block-a">
+        	<h3 class="panel-title">Фильтр</h3>
+        	<span class="glyphicon glyphicon-chevron-down"></span>
+        </a>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse out">
+	    <div class="panel-body">
+	        <form role="form" action="publications" method="GET">
+	            <div class="row">
+	            	<div class="col-md-3">
+	                    <label for="publishingHouseName">ФИО автора</label>
+	                    <input type="text" name="userName" class="form-control" placeholder="Например: Столетов">
+	                </div>
+	                <div class="col-md-3">
+	                    <label for="typePublication">Тип публикации</label>
+	                    <select id="disabledSelect" name="typePublication" class="form-control">
+	                        <option value="" selected>...</option>
+	                        <option value="guidelines">Методическое указание</option>
+	                        <option value="book">Книга</option>
+	                        <option value="journal">Статья в журнале</option>
+	                        <option value="compilation">Конспект лекции/сборник докладов</option>
+	                        <option value="collection">Сборник трудов</option>
+	                    </select>
+	                </div>
+	                <div class="col-md-3">
+	                    <label for="publishingHouseName">Название издательства</label>
+	                    <input type="text" name="publishingHouseName" class="form-control" placeholder="«ЛИТЕРА»">
+	                </div>
+	                <div class="col-md-3">
+	                    <label for="place">Место издания</label>
+	                    <input type="text" name="place" class="form-control" placeholder="Город/адрес">
+	                </div>
+	                 <div class="col-md-3">
+	                    <label for="date">Дата издания (ДД-ММ-ГГГГ)</label>
+	                    <input type="text" name="date" class="form-control" placeholder="26-11-2016">
+	                </div>
+	                <div class="col-md-3">
+	                    <label for="volume">Объем</label>
+	                    <input type="number" name="volume" class="form-control" placeholder="Объем">
+	                </div>
+	                 <div class="col-md-3">
+	                    <label for="unitVolume">Единицы объёма</label>
+	                    <input type="text" name="unitVolume" class="form-control" placeholder="Книги">
+	                </div>
+	                <div class="col-md-3">
+	                    <label for="edition">Тираж</label>
+	                    <input type="number" name="edition" class="form-control" placeholder="Число выпущенных изданий">
+	                </div>
+	                <div class="col-md-3">
+	                    <label for="bookName">Название публикации</label>
+	                    <input type="text" name="bookName" class="form-control" placeholder="Название">
+	                </div>
+	                <div class="col-md-3 display-none">
+	                    <label for="type">Вид</label>
+	                    <input type="text" name="type" class="form-control" placeholder="Вид">
+	                </div>
+	                <div class="col-md-3 display-none">
+	                    <label for="isbn">ISBN</label>
+	                    <input type="text" name="isbn" class="form-control" placeholder="Номер ISBN">
+	                </div>
+	                <div class="col-md-3 display-none">
+	                    <label for="number">Номер издания</label>
+	                    <input type="text" name="number" class="form-control" placeholder="Номер издания">
+	                </div>
+	                <div class="col-md-3 display-none">
+	                    <label for="editor">Редактор сборника</label>
+	                    <input type="text" name="editor" class="form-control" placeholder="ФИО редактора">
+	                </div>
+	                <div class="col-md-3 display-none">
+	                    <label for="nameSbornik">Название сборника</label>
+	                    <input type="text" name="nameSbornik" class="form-control" placeholder="Название сборника">
+	                </div>
+	                <div class="col-md-3 display-none">
+	                    <label for="reiteration">Вид повторения сборника</label>
+	                    <select id="disabledSelect" name="reiteration" class="form-control">
+	                        <option value="" selected>...</option>
+	                        <option value="disposable">одноразовый</option>
+	                        <option value="repeating">повторяющийся</option>
+	                    </select>
+	                </div>
+	                <br/>
+	                <div class="col-md-12 text-center filter_button">
+	                    <button type="submit" name="button_filter" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Применить фильтр</button>
+	                    <button type="submit" name="reset" class="btn btn-default"><span class="glyphicon glyphicon-repeat"></span> Сбросить</button>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+    </div>
+</div>
+<div class="row content">
+	{% for note in notes %}
+	    <div class="col-md-12 element">
+	    	<div class="col-md-3">
+		    	<strong>Автор</strong>
+		        <p>{{ note.user.FIO }}</p>
+	    	</div>
+	        
+	    	<div class="col-md-3">
+		        <strong>Тип публикации</strong>
+		        {% if note.typePublication == "book" %}
+		            <p>Книга</p>
+		        {% elif note.typePublication == "collection" %}
+		            <p>Сборник трудов</p>
+		        {% elif note.typePublication == "journal" %}
+		            <p>Журнал</p>
+		        {% elif note.typePublication == "guidelines" %}
+		            <p>Методическое указание</p>
+		        {% elif note.typePublication == "compilation" %}
+		            <p>Конспект лекции/сборник докладов</p>
+		        {% endif %}
+	        </div>
+
+	        <div class="col-md-3">
+		        <strong>Название издательства</strong>
+		        <p>{{ note.publishingHouseName }}</p>
+			</div>
+
+	        <div class="col-md-3">
+		        <strong>Место издания</strong>
+		        <p>{{ note.place }}</p>
+	        </div>
+
+	        <div class="col-md-3">
+		        <strong>Дата издания</strong>
+		        <p>{{ note.date|date:'d-m-Y' }}</p>
+	        </div>
+
+	        <div class="col-md-3">
+		        <strong>Объём</strong>
+		        <p>{{ note.volume }}</p>
+	        </div>
+
+	        <div class="col-md-3">
+		        <strong>Единицы объёма</strong>
+		        <p>{{ note.unitVolume }}</p>
+	        </div>
+
+	        <div class="col-md-3">
+		        <strong>Тираж</strong>
+		        <p>{{ note.edition }}</p>
+	        </div>
+
+	        {% if note.typePublication != "collection" %}
+		        <div class="col-md-3">
+			        <strong>Название</strong>
+			        <p>{{ note.bookName }}</p>
+		        </div>
+	        {% endif %}
+
+	        {% if note.typePublication == "guidelines" or note.typePublication == "book" or note.typePublication == compilation %}
+		        <div class="col-md-3">
+			        <strong>Вид</strong>
+			        <p>{{ note.type }}</p>
+		        </div>
+	        {% endif %}
+
+	        {% if note.typePublication == "guidelines" or note.typePublication == "book" %}
+		        <div class="col-md-3">
+			        <strong>ISBN</strong>
+			        <p>{{ note.isbn }}</p>
+		        </div>
+	        {% endif %}
+
+	        {% if note.typePublication == "journal" %}
+		        <div class="col-md-3">
+			        <strong>Номер издания</strong>
+			        <p>{{ note.number }}</p>
+		        </div>
+	        {% endif %}
+
+	        {% if note.typePublication == "collection" %}
+		        <div class="col-md-3">
+			        <strong>Редактор сборника</strong>
+			        <p>{{ note.editor }}</p>
+		        </div>
+
+		        <div class="col-md-3">
+			        <strong>Название сборника</strong>
+			        <p>{{ note.nameSbornik }}</p>
+		        </div>
+
+		        <div class="col-md-3">
+			        <strong>Вид повторения сборника</strong>
+			        {% if note.reiteration == "disposable" %}
+			             <p>Одноразовый</p>
+			        {% elif note.reiteration == "repeating" %}
+			            <p>Повторяющийся</p>
+			        {% endif %}
+		        </div>
+	        {% endif %}
+	    </div>
+	{% endfor %}
+	<div class="col-md-12 pagination text-center">
+	    <span class="step-links">
+	        {% if notes.has_previous %}
+	            <a href="?page={{ notes.previous_page_number }}&userName={{ userName }}&typePublication={{ tp }}&publishingHouseName={{ pH }}&place={{ pl }}&date={{ dt }}&volume={{ vl }}&unitVolume={{ uvl }}&edition={{ ed }}&bookName={{ nm }}&type={{ type }}&isbn={{ ISBN }}&number={{ number }}&editor={{ editor }}&nameSbornik={{ nameSbornik }}&reiteration={{ reiteration }}">Предыдущая</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Страница {{ notes.number }} из {{ notes.paginator.num_pages }}.
+	        </span>
+
+	        {% if notes.has_next %}
+	            <a href="?page={{ notes.next_page_number }}&userName={{ userName }}&typePublication={{ tp }}&publishingHouseName={{ pH }}&place={{ pl }}&date={{ dt }}&volume={{ vl }}&unitVolume={{ uvl }}&edition={{ ed }}&bookName={{ nm }}&type={{ type }}&isbn={{ ISBN }}&number={{ number }}&editor={{ editor }}&nameSbornik={{ nameSbornik }}&reiteration={{ reiteration }}">Следующая</a>
+	        {% endif %}
+	    </span>
+	</div>
+</div>
+
+    
+
+{% endblock %}

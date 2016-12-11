@@ -1,0 +1,491 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "id": "581bfafcf3095751234898b6",
+      "username": "admin",
+      "first_name": "Админ1Имя",
+      "last_name": "Админ1Фамилия",
+      "is_active": true,
+      "email": "admin@gmail.com",
+      "is_superuser": true,
+      "is_staff": false,
+      "last_login": "2016-12-07T19:11:07.914Z",
+      "password": "pbkdf2_sha256$10000$EnwEDagjYblW$dxe3q4HKH9MSpn1NQWIjah/+8jqzT1PjTawa8OxKlC8=",
+      "date_joined": "2016-11-03T12:05:32.873Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "id": "581bfafdf3095751234898b8",
+      "username": "teacher",
+      "first_name": "УчительИмя",
+      "last_name": "УчительФамилия",
+      "is_active": true,
+      "email": "teacher@gmail.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-04T03:05:33.331Z",
+      "password": "pbkdf2_sha256$10000$Rlae2ZhtsngH$LFbk5pgYjAx/0c9aHFE+O0nOPgJ4ooR5s8lqspLjkoM=",
+      "date_joined": "2016-11-04T03:05:33.331Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "id": "581bfafdf3095751234898ba",
+      "username": "head",
+      "first_name": "СтаростаИмя",
+      "last_name": "СтаростаФамилия",
+      "is_active": true,
+      "email": "head@gmail.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-04T03:05:33.424Z",
+      "password": "pbkdf2_sha256$10000$kbcH8ke6mcP7$K5xuB4NF36kUHsGWFRiO1UBaEQLvijniqt/7EuDmT/Y=",
+      "date_joined": "2016-11-04T03:05:33.424Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+      "id": "581bfafdf3095751234898bc",
+      "username": "student0",
+      "first_name": "Студент0Имя",
+      "last_name": "Студент0Фамилия",
+      "is_active": true,
+      "email": "student0@gmail.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-04T03:05:33.480Z",
+      "password": "pbkdf2_sha256$10000$IsVaWS5iij1b$JFJ2J/6i83W2Wi9G+n47aOYwqR6Ab3k1TuTD9d9Nw84=",
+      "date_joined": "2016-11-04T03:05:33.480Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+      "id": "581bfafdf3095751234898be",
+      "username": "student1",
+      "first_name": "Студент1Имя",
+      "last_name": "Студент1Фамилия",
+      "is_active": true,
+      "email": "student1@gmail.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-12-10T20:25:12.439Z",
+      "password": "pbkdf2_sha256$10000$Pojyw2uCwCzZ$ups1PruZumk1CAAlqWR3J3OWh0spZMsxXU1jeOLJ/4U=",
+      "date_joined": "2016-11-03T21:05:33.526Z"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+      "id": "581bfafdf3095751234898c0",
+      "username": "student2",
+      "first_name": "Студент2Имя",
+      "last_name": "Студент2Фамилия",
+      "is_active": true,
+      "email": "student2@gmail.com",
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2016-11-04T03:05:33.574Z",
+      "password": "pbkdf2_sha256$10000$th3SasWcFdar$qhuJOKhtT2TdLCPP5QmoGzULpGkOZIkqVaMEB37Howw=",
+      "date_joined": "2016-11-04T03:05:33.574Z"
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 7,
+    "fields": {
+      "id": "581bfafdf3095751234898b7",
+      "user": "581bfafcf3095751234898b6",
+      "github_id": "admingihub",
+      "study_group": null,
+      "election_date": null,
+      "stepic_id": "adminstepic",
+      "contract_date": null,
+      "academic_status": null,
+      "birth_date": null,
+      "academic_degree": null,
+      "type": "a",
+      "year_of_academic_status": null,
+      "patronymic": "Админ1Отчество",
+      "position": null,
+      "year_of_academic_degree": null
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 8,
+    "fields": {
+      "id": "581bfafdf3095751234898b9",
+      "user": "581bfafdf3095751234898b8",
+      "github_id": "teachergithub",
+      "study_group": null,
+      "election_date": null,
+      "stepic_id": "teacherstepic",
+      "contract_date": null,
+      "academic_status": null,
+      "birth_date": null,
+      "academic_degree": null,
+      "type": "t",
+      "year_of_academic_status": null,
+      "patronymic": "УчительОтчество",
+      "position": null,
+      "year_of_academic_degree": null
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 9,
+    "fields": {
+      "id": "581bfafdf3095751234898bb",
+      "user": "581bfafdf3095751234898ba",
+      "github_id": "",
+      "study_group": 2304,
+      "election_date": null,
+      "stepic_id": "stepicid",
+      "contract_date": null,
+      "academic_status": null,
+      "birth_date": null,
+      "academic_degree": null,
+      "type": "h",
+      "year_of_academic_status": null,
+      "patronymic": null,
+      "position": null,
+      "year_of_academic_degree": null
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 10,
+    "fields": {
+      "id": "581bfafdf3095751234898bd",
+      "user": "581bfafdf3095751234898bc",
+      "github_id": "githubid",
+      "study_group": "2304",
+      "election_date": null,
+      "stepic_id": "stepicid",
+      "contract_date": null,
+      "academic_status": null,
+      "birth_date": null,
+      "academic_degree": null,
+      "type": "s",
+      "year_of_academic_status": null,
+      "patronymic": "Студент1Отчество",
+      "position": null,
+      "year_of_academic_degree": null
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 11,
+    "fields": {
+      "id": "581bfafdf3095751234898bf",
+      "user": "581bfafdf3095751234898be",
+      "github_id": "githubid",
+      "study_group": "2304",
+      "election_date": null,
+      "stepic_id": "stepicid",
+      "contract_date": null,
+      "academic_status": null,
+      "birth_date": null,
+      "academic_degree": null,
+      "type": "s",
+      "year_of_academic_status": null,
+      "patronymic": "Студент1Отчество",
+      "position": null,
+      "year_of_academic_degree": null
+    }
+  },
+  {
+    "model": "moevmCommon.UserProfile",
+    "pk": 12,
+    "fields": {
+      "id": "581bfafdf3095751234898c1",
+      "user": "581bfafdf3095751234898c0",
+      "github_id": "githubid",
+      "study_group": "2304",
+      "election_date": null,
+      "stepic_id": "stepicid",
+      "contract_date": null,
+      "academic_status": null,
+      "birth_date": null,
+      "academic_degree": null,
+      "type": "s",
+      "year_of_academic_status": null,
+      "patronymic": "Студент2Отчество",
+      "position": null,
+      "year_of_academic_degree": null
+    }
+  },
+  {
+    "model": "studentrecords.Grades",
+    "pk": 13,
+    "fields": {
+      "id": "5838f488f309571efbbe0576",
+      "grades": [
+        {
+          "labs": [
+            {
+              "grade": 3,
+              "title": "Лаба1"
+            },
+            {
+              "grade": 4,
+              "title": "Лаба2"
+            },
+            {
+              "grade": 5,
+              "title": "Лаба3"
+            }
+          ],
+          "name": "Информатика"
+        },
+        {
+          "labs": [
+            {
+              "grade": 5,
+              "title": "Лаба1"
+            },
+            {
+              "grade": 4,
+              "title": "Лаба2"
+            },
+            {
+              "grade": 3,
+              "title": "Лаба3"
+            }
+          ],
+          "name": "Программирование"
+        }
+      ],
+      "user": "581bfafdf3095751234898bd"
+    }
+  },
+  {
+    "model": "studentrecords.Grades",
+    "pk": 14,
+    "fields": {
+      "id": "5838f488f309571efbbe0577",
+      "grades": [
+        {
+          "labs": [
+            {
+              "grade": 3,
+              "title": "Лаба1"
+            },
+            {
+              "grade": 4,
+              "title": "Лаба2"
+            },
+            {
+              "grade": 5,
+              "title": "Лаба3"
+            }
+          ],
+          "name": "Информатика"
+        },
+        {
+          "labs": [
+            {
+              "grade": 5,
+              "title": "Лаба1"
+            },
+            {
+              "grade": 4,
+              "title": "Лаба2"
+            },
+            {
+              "grade": 3,
+              "title": "Лаба3"
+            }
+          ],
+          "name": "Программирование"
+        }
+      ],
+      "user": "581bfafdf3095751234898bf"
+    }
+  },
+  {
+    "model": "studentrecords.Grades",
+    "pk": 15,
+    "fields": {
+      "id": "5838f488f309571efbbe0578",
+      "grades": [
+        {
+          "labs": [
+            {
+              "grade": 3,
+              "title": "Лаба1"
+            },
+            {
+              "grade": 4,
+              "title": "Лаба2"
+            },
+            {
+              "grade": 5,
+              "title": "Лаба3"
+            }
+          ],
+          "name": "Информатика"
+        },
+        {
+          "labs": [
+            {
+              "grade": 5,
+              "title": "Лаба1"
+            },
+            {
+              "grade": 4,
+              "title": "Лаба2"
+            },
+            {
+              "grade": 3,
+              "title": "Лаба3"
+            }
+          ],
+          "name": "Программирование"
+        }
+      ],
+      "user": "581bfafdf3095751234898c1"
+    }
+  },
+  {
+    "model": "studentrecords.Attendance",
+    "pk": 16,
+    "fields": {
+      "id": "5838f1cdf309571d32d68093",
+      "attendance_records": [
+        {
+          "date": "2016-11-25T21:00:00.000Z",
+          "lesson_name": "Информатика"
+        },
+        {
+          "date": "2016-11-25T21:00:00.000Z",
+          "lesson_name": "Программирование"
+        }
+      ],
+      "user": "581bfafdf3095751234898bd"
+    }
+  },
+  {
+    "model": "studentrecords.Attendance",
+    "pk": 17,
+    "fields": {
+      "id": "5838f1cdf309571d32d68094",
+      "attendance_records": [
+        {
+          "date": "2016-11-25T21:00:00.000Z",
+          "lesson_name": "Информатика"
+        },
+        {
+          "date": "2016-11-25T21:00:00.000Z",
+          "lesson_name": "Программирование"
+        }
+      ],
+      "user": "581bfafdf3095751234898bf"
+    }
+  },
+  {
+    "model": "studentrecords.Attendance",
+    "pk": 18,
+    "fields": {
+      "id": "5838f1cdf309571d32d68095",
+      "attendance_records": [
+        {
+          "date": "2016-11-25T21:00:00.000Z",
+          "lesson_name": "Информатика"
+        },
+        {
+          "date": "2016-11-25T21:00:00.000Z",
+          "lesson_name": "Программирование"
+        }
+      ],
+      "user": "581bfafdf3095751234898c1"
+    }
+  },
+  {
+    "model": "studentrecords.TermProject",
+    "pk": 19,
+    "fields": {
+      "id": "5838f1cdf309571d32d68096",
+      "user": "581bfafdf3095751234898bd",
+      "projects": [
+        {
+          "lesson_name" : "Информатика",
+          "project_title": "Title1",
+          "github_link": "link"
+        },
+        {
+          "lesson_name" : "Программирование",
+          "project_title": "Title1",
+          "github_link": "link"
+        },
+        {
+          "lesson_name" : "Мат. анализ",
+          "project_title": "Title1",
+          "github_link": "link"
+        }
+      ]
+    }
+  },
+  {
+    "model": "studentrecords.TermProject",
+    "pk": 20,
+    "fields": {
+      "id": "5838f1cdf309571d32d68097",
+      "user": "581bfafdf3095751234898bf",
+      "projects": [
+        {
+          "lesson_name" : "Информатика",
+          "project_title": "Title1",
+          "github_link": "link"
+        },
+        {
+          "lesson_name" : "Программирование",
+          "project_title": "Title1",
+          "github_link": "link"
+        },
+        {
+          "lesson_name" : "Мат. анализ",
+          "project_title": "Title1",
+          "github_link": "link"
+        }
+      ]
+    }
+  },
+  {
+    "model": "studentrecords.TermProject",
+    "pk": 21,
+    "fields": {
+      "id": "5838f1cdf309571d32d68098",
+      "user": "581bfafdf3095751234898c1",
+      "projects": [
+        {
+          "lesson_name" : "Информатика",
+          "project_title": "Title1",
+          "github_link": "link"
+        },
+        {
+          "lesson_name" : "Программирование",
+          "project_title": "Title1",
+          "github_link": "link"
+        },
+        {
+          "lesson_name" : "Мат. анализ",
+          "project_title": "Title1",
+          "github_link": "link"
+        }
+      ]
+    }
+  }
+]

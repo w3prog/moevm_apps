@@ -19,9 +19,10 @@ from django.conf.urls import include
 from .views import mainPage
 admin.autodiscover()
 urlpatterns = [
+url(r'^$', mainPage),
+
     url(r'^admin/', admin.site.urls),
     url(r'^teacherPlan', include('teacherPlan.urls')),
-    url(r'^$', mainPage)
-    #url(r'scientificWork^', include('scientificWork.urls')),
-    #url(r'studentrecords', include('studentrecords.urls', namespace='studentrecords')),
+    url(r'^scientificWork/', include('scientificWork.urls')),
+    url(r'^studentrecords/', include('studentrecords.urls', namespace='studentrecords')),
 ]

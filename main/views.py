@@ -4,4 +4,4 @@
 from django.shortcuts import render,redirect
 
 def mainPage(request):
-  return render(request,"index_main_page.html")
+  return render(request, "teacherPlan/index_main_page.html")

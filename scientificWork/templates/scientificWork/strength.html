@@ -1,0 +1,13 @@
+{% extends 'scientificWork/template_main.html' %}
+{% block title %}Численность аспирантов, докторантов, соискателей и стажеров{% endblock %}
+{% block pagename %}Численность аспирантов, докторантов, соискателей и стажеров{% endblock %}
+{% block content %}
+<div class="row content">
+    <div class="col-md-12">
+    	<p><strong>Аспирантов:</strong> {{ aspirant }} </p>
+    	<p><strong>Докторантов:</strong> {{ doctorant }} </p>
+    	<p><strong>Соискателей:</strong> {{ soiskatel }} </p>
+    	<p><strong>Стажёров:</strong> {{ stajer }} </p>
+    </div>
+</div>
+{% endblock %}
