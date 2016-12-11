@@ -37,11 +37,16 @@
 </div>
 
 <div class="row content">
+    {% if rands|length = 0 %}
+    <div class="col-md-12 text-center">
+        К сожалению по указанному фильтру мы не нашли подходящих данных, пожалуйста, попробуйте изменить поисковый запрос.
+    </div>
+    {% endif %}
     {% for rand in rands %}
         <div class="col-md-12 element">
             <div class="col-md-3">
                 <strong>Пользователь</strong>
-                <p>{{ rand.user.user.last_name }}</p>
+                <p>{{ rand.user.FIO }}</p>
             </div>
             <div class="col-md-3">
                 <strong>Название НИОКР</strong>

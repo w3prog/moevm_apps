@@ -18,12 +18,19 @@ from moevmCommon.models import UserProfile
 # Константы
 MAX_ELEMENT_PAGE = 3; # Максимальное количество элементов на странице
 
+def isint(value):
+    try:
+        int(value)
+        return True
+    except ValueError:
+        return False
+
 def index(request):
 	return render(request,'scientificWork/index.html')
 
 
 def competitions(request):
-    comp_list=Participation.objects.all()
+    comp_list = Participation.objects.all()
     users = UserProfile.objects.all()
     users_with_names = User.objects.all()
     userName = ''
@@ -42,17 +49,34 @@ def competitions(request):
         r = request.GET.get('reiteration')
         rk = request.GET.get('rank')  
         if (userName != ''): 
-            users_with_names = users_with_names.filter(last_name=userName)
+            userNameList = userName.split()
+            users_with_names = users_with_names.filter(last_name__icontains=userNameList[0])
+            if len(userNameList) > 1: users_with_names = users_with_names.filter(first_name__icontains=userNameList[1])
+
             if users_with_names:
-                user_ids = users_with_names[0].id
-                users = users.filter(user_id=user_ids)[0].id
-                comp_list = comp_list.filter(user_id=users)
-            else:
-                comp_list = comp_list.filter(type='1')
+                A = []
+                for item in users_with_names:
+                    users = UserProfile.objects.all()
+                    users = users.filter(user_id=item.id)
+                    if len(userNameList) > 2: 
+                        users = users.filter(patronymic__icontains=userNameList[2])
+                    if users.count() > 0:
+                        A.append(users[0].id)
+                #user_ids = users_with_names[0].id
+                comp_list = comp_list.filter(user_id__in=A)
         if (t != ''): comp_list = comp_list.filter(type=t)
         if (n != ''): comp_list = comp_list.filter(name=n)
         if (p != ''): comp_list = comp_list.filter(place=p)
-        if (dt != ''): comp_list = comp_list.filter(date=dt)
+        if (dt != ''):
+            datetime_objects = dt.split("-")
+            if len(datetime_objects) == 1:
+                if isint(dt):
+                    comp_list = comp_list.filter(date__year=int(dt))
+                else:
+                    comp_list = comp_list.filter(type='sdafsdfasdf');
+            else:
+                datetime_objects = datetime.strptime(dt, '%d-%M-%Y').strftime('%Y-%M-%d')
+                comp_list = comp_list.filter(date=datetime_objects)
         if (r != ''): comp_list = comp_list.filter(reiteration=r)        
         if (rk != ''): comp_list = comp_list.filter(rank=rk)       
     if 'button_reset' in request.GET:
@@ -132,8 +156,15 @@ def publications(request):
         if (pl != ''): s = s.filter(place=pl)
         if (tp != ''): s = s.filter(typePublication=tp)
         if (dt != ''):
-            datetime_object = datetime.strptime(dt, '%d-%M-%Y').strftime('%Y-%M-%d')
-            s = s.filter(date=datetime_object)
+            datetime_objects = dt.split("-")
+            if len(datetime_objects) == 1:
+                if isint(dt):
+                    s = s.filter(date__year=int(dt))
+                else:
+                    s = s.filter(type='-23534fdsg')
+            else:
+                datetime_objects = datetime.strptime(dt, '%d-%M-%Y').strftime('%Y-%M-%d')
+                s = s.filter(date=datetime_objects)
         if (vl != ''): s = s.filter(volume=vl)
         if (uvl != ''): s = s.filter(unitVolume=uvl)
         if (ed != ''): s = s.filter(edition=ed)
@@ -188,13 +219,20 @@ def rads(request):
         if(n!=''):rand_list=rand_list.filter(name=n)
         if(c!=''):rand_list=rand_list.filter(cipher=c)
         if (userName != ''): 
-            users_with_names = users_with_names.filter(last_name=userName)
+            userNameList = userName.split(" ")
+            users_with_names = users_with_names.filter(last_name__icontains=userNameList[0])
+            if len(userNameList) > 1: users_with_names = users_with_names.filter(first_name__icontains=userNameList[1])
+
             if users_with_names:
-                user_ids = users_with_names[0].id
-                users = users.filter(user_id=user_ids)[0].id
-                rand_list = rand_list.filter(user_id=users)
-            else:
-                rand_list = rand_list.filter(cipher='-123')
+                A = []
+                for item in users_with_names:
+                    users = UserProfile.objects.all()
+                    users = users.filter(user_id=item.id)
+                    if len(userNameList) > 2: 
+                        users = users.filter(patronymic__icontains=userNameList[2])
+                    if users.count() > 0:
+                        A.append(users[0].id)
+                rand_list = rand_list.filter(user_id__in=A)
     if 'button_reset' in request.GET:
         rand_list=Rand.objects.all()
     paginator=Paginator(rand_list,MAX_ELEMENT_PAGE)

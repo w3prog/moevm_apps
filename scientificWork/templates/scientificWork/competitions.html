@@ -35,7 +35,7 @@
                     </div>
                      <div class="col-md-3">
                         <label for="date">Дата проведения (ДД-ММ-ГГГГ)</label>
-                        <input type="text" name="date" class="form-control" placeholder="26-11-2016">
+                        <input type="text" name="date" class="form-control" placeholder="26-11-2016 или 2016">
                     </div>
                     <div class="col-md-3 ">
                         <label for="rank">Ранг</label>
@@ -62,11 +62,16 @@
     </div>
 </div>
 <div class="row content">
+    {% if comps|length = 0 %}
+    <div class="col-md-12 text-center">
+        К сожалению по указанному фильтру мы не нашли подходящих данных, пожалуйста, попробуйте изменить поисковый запрос.
+    </div>
+    {% endif %}
     {% for comp in comps %}
         <div class="col-md-12 element">
             <div class="col-md-3">
                 <strong>Пользователь</strong>
-                <p>{{ comp.user.user.last_name }}</p>
+                <p>{{ comp.user.FIO }}</p>
             </div>
 
             <div class="col-md-3">

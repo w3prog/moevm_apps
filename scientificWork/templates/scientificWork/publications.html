@@ -38,7 +38,7 @@
 	                </div>
 	                 <div class="col-md-3">
 	                    <label for="date">Дата издания (ДД-ММ-ГГГГ)</label>
-	                    <input type="text" name="date" class="form-control" placeholder="26-11-2016">
+	                    <input type="text" name="date" class="form-control" placeholder="26-11-2016 или 2016">
 	                </div>
 	                <div class="col-md-3">
 	                    <label for="volume">Объем</label>
@@ -95,6 +95,11 @@
     </div>
 </div>
 <div class="row content">
+	{% if notes|length = 0 %}
+    <div class="col-md-12 text-center">
+        К сожалению по указанному фильтру мы не нашли подходящих данных, пожалуйста, попробуйте изменить поисковый запрос.
+    </div>
+    {% endif %}
 	{% for note in notes %}
 	    <div class="col-md-12 element">
 	    	<div class="col-md-3">
