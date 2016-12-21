@@ -28,13 +28,13 @@ def user_login(request):
         return render(request, 'studentrecords/login.html')
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/studentrecords')
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def attendance(request):
 
     profile = UserProfile.get_profile_by_user_id(request.user.id)
@@ -53,7 +53,7 @@ def attendance(request):
     return render(request, 'studentrecords/attendance.html', {'attendance': attendance_info, 'profile': profile})
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def grades(request):
 
     profile = UserProfile.get_profile_by_user_id(request.user.id)
@@ -72,7 +72,7 @@ def grades(request):
     return render(request, 'studentrecords/grades.html', {'grades': grades_info, 'profile': profile})
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def group_list(request):
 
     profile = UserProfile.get_profile_by_user_id(request.user.id)
@@ -102,7 +102,7 @@ def group_list(request):
 #     return render(request, 'report-download.html')
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def students(request):
 
     profile = UserProfile.get_profile_by_user_id(request.user.id)
@@ -115,7 +115,7 @@ def students(request):
     return render(request, 'studentrecords/students.html', {'students': students_info, 'profile': profile})
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def term_projects(request):
 
     profile = UserProfile.get_profile_by_user_id(request.user.id)
@@ -131,6 +131,6 @@ def term_projects(request):
     return render(request, 'studentrecords/term-projects.html', {'projectlist': term_projects_info, 'profile': profile})
 
 
-@login_required
+@login_required(login_url="/studentrecords/login")
 def timetable(request):
     return render(request, 'studentrecords/timetable.html', {})
