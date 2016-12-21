@@ -22,7 +22,7 @@ urlpatterns = [
 url(r'^$', mainPage),
 
     url(r'^admin/', admin.site.urls),
-    url(r'^teacherPlan', include('teacherPlan.urls')),
+    url(r'^teacherPlan/', include('teacherPlan.urls')),
     url(r'^scientificWork/', include('scientificWork.urls')),
     url(r'^studentrecords/', include('studentrecords.urls', namespace='studentrecords')),
 ]
