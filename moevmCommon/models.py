@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import forms
 from django.utils.encoding import python_2_unicode_compatible
+from djangotoolbox.fields import EmbeddedModelField
+from djangotoolbox.fields import ListField
+
 
 def filter_by_foreign_fields(model_manager, **filter_fields):
 
@@ -183,8 +187,6 @@ class UserProfileManager(models.Manager):
             academic_status=academic_status,
         )
 
-
-
 PERSON_TYPE_CHOICES = (
     ('s', 'Студент'),
     ('h', 'Староста'),
@@ -357,7 +359,13 @@ class UserProfile(models.Model):
 
     @staticmethod
     def get_profile_by_user(user):
-      return UserProfile.objects.get(user_id=user.id)
+      us = None
+      try:
+        us = UserProfile.objects.get(user_id=user.id)
+      #todo возможно не лучший способ определить ошибку.
+      except :
+        us = UserProfile.objects.create(user=user)
+      return us
 
     @staticmethod
     def check_teacher(user):
@@ -392,30 +400,6 @@ class AcademicDiscipline(models.Model):
     max_length=150,
     verbose_name="Наименование дисциплины",
   )
-
-  @staticmethod
-  def create(**params):
-    academicDiscipline = AcademicDiscipline.objects.create(
-      name=params.get('name'),
-
-    )
-    academicDiscipline.save()
-
-    return academicDiscipline
-
-  def __str__(self):
-    return self.name
-
-
-class AcademicDisciplineOfTeacher(models.Model):
-  teacher = models.ForeignKey(
-    UserProfile,
-    verbose_name="Преподаватель",
-  )
-  disc = models.ForeignKey(
-    AcademicDiscipline,
-    verbose_name="Дисциплины",
-  )
   type = models.CharField(
     max_length=40,
     null=True,
@@ -426,44 +410,52 @@ class AcademicDisciplineOfTeacher(models.Model):
     null=True,
     verbose_name="Характер обновления",
   )
-  completeMark = models.NullBooleanField(
-    default=False,
-    null=True,
-    verbose_name="Отметка о завершении",
-  )
 
   @staticmethod
   def create(**params):
-    academicDisciplineOfTeacher = AcademicDisciplineOfTeacher.objects.create(
-      teacher=params.get('teacher'),
-      disc=params.get('disc'),
+    academicDiscipline = AcademicDiscipline.objects.create(
+      disc=params.get('name'),
       type=params.get('type'),
       characterUpdate=params.get('characterUpdate'),
-      completeMark=params.get('completeMark'),
     )
-    academicDisciplineOfTeacher.save()
+    academicDiscipline.save()
 
-    return academicDisciplineOfTeacher
+    return academicDiscipline
 
   def __str__(self):
     return self.teacher + " " + self.disc
 
-class NIR(models.Model):
-  user = models.ForeignKey(
-    UserProfile,
-    verbose_name="Сотрудник",
+
+class StudyBook(models.Model):
+  name = models.CharField(
+    max_length=80,
+    verbose_name="Название",
   )
-  workName = models.CharField(
+  type = models.CharField(
+    max_length=80,
+    verbose_name="Вид издания",
+  )
+  volume = models.IntegerField(
+    verbose_name="Объем",
+  )
+  vulture = models.CharField(
+    max_length=80,
+    verbose_name="Вид грифа",
+  )
+  finishDate = models.CharField(
+    max_length=20,
+    verbose_name="Срок сдачи рукописи",
+  )
+
+class NIR(models.Model):
+  name = models.CharField(
     max_length=250,
     verbose_name="Название работ",
   )
-  startDate = models.DateField(
+  period = models.CharField(
     null=True,
-    verbose_name="Дата начала работ",
-  )
-  finishDate = models.DateField(
-    null=True,
-    verbose_name="Дата конца работ",
+    verbose_name="Период работ",
+    max_length=80
   )
   role = models.CharField(
     max_length=100,
@@ -475,29 +467,6 @@ class NIR(models.Model):
     null=True,
     verbose_name="Организация",
   )
-  cipher = models.CharField(
-    max_length="100",
-    null=True,
-    verbose_name = "Шифр",
-  )
-
-  @staticmethod
-  def create(**params):
-    nir = NIR.objects.create(
-      user=params.get('user'),
-      startDate=params.get('startDate'),
-      finishDate = params.get('finishDate'),
-      role = params.get('role'),
-      organisation = params.get('organisation'),
-      cipher = params.get('cipher'),
-    )
-
-    nir.save()
-
-    return nir
-
-  def __str__(self):
-    return self.workName + " " + self.organisation + " " + self.cipher
 
 TYPE_PUBLICATION_CHOICES = (
   ('guidelines', 'Методическое указание'),
@@ -511,7 +480,6 @@ reIter = (
   ('disposable', 'одноразовый'),
   ('repeating', 'повторяющийся')
 )
-
 
 class Publication(models.Model):
   user = models.ForeignKey(
@@ -646,8 +614,21 @@ reIter = (
         ('repeating', 'повторяющийся')
 )
 
-class ScientificEvent(models.Model):
-  event_name = models.CharField(
+class Participation(models.Model):
+  date = models.CharField(
+    verbose_name="Дата проведения",
+    null=True,
+    max_length=20,
+  )
+
+  type = models.CharField(
+    max_length=1,
+    choices=EVENT_TYPE_CHOISES,
+    default='c',
+    verbose_name = "Тип",
+  )
+
+  name = models.CharField(
     max_length=255,
     verbose_name="Название",
   )
@@ -656,63 +637,56 @@ class ScientificEvent(models.Model):
     null=True,
     verbose_name="Уровень",
   )
-  date = models.DateField(
-    verbose_name="Дата проведения",
-    null=True,
-  )  # дата проведения
   place = models.CharField(
     verbose_name="Место проведения",
     max_length="100",
     null = True,
   )
-  type = models.CharField(
-    max_length=1,
-    choices=EVENT_TYPE_CHOISES,
-    default='c',
-    verbose_name = "Тип",
-  )
-
-  @staticmethod
-  def create(**params):
-    scientificEvent = ScientificEvent.objects.create(
-      event_name=params.get('eventName'),
-      level=params.get('level'),
-      date=params.get('date'),
-      place=params.get('place'),
-      type=params.get('type'),
-    )
-
-    scientificEvent.save()
-
-    return scientificEvent
-
-  def __str__(self):
-    # todo проверить корректность вывода
-    return self.type + " " + self.level + " " + self.event_name
-
-
-class Participation(models.Model):
-  scientific_event = models.ForeignKey(
-    ScientificEvent,
-    verbose_name="Мероприятие",
-  )
-  user = models.ForeignKey(
-    UserProfile,
-    related_name='author_part'
-  )
-  title = models.CharField(
+  report = models.CharField(
     max_length=250,
     null=True,
-    verbose_name="Заголовок",
+    verbose_name="Название доклада",
   )
 
-  @staticmethod
-  def create(**params):
-    participation = Participation.objects.create(
-      scientific_event=params.get('scientificEvent'),
-      user=params.get('user'),
-      title=params.get('title'),
-    )
+@python_2_unicode_compatible
+class Qualification(models.Model):
+  ql_date = models.CharField(max_length=20, verbose_name="Период")
+  for_ql = models.CharField(max_length=200, verbose_name="Форма повышения квалификации")
+  doc = models.CharField(max_length=200, verbose_name="Документ")
 
-  def __str__(self):
-    return self.user + " на " + self.scientific_event.event_name
+@python_2_unicode_compatible
+class AnotherWork(models.Model):
+  work_date = models.CharField(verbose_name="Период", max_length=20)
+  v_work = models.CharField(max_length=200, verbose_name="Вид работы")
+
+@python_2_unicode_compatible
+class TeacherPublication(models.Model):
+  name_work = models.CharField(max_length=200, verbose_name="Наименование работ")
+  type = models.CharField(max_length=200, verbose_name="Вид публикации")
+  volume = models.IntegerField(verbose_name="Объем")
+  name_publisher = models.CharField(max_length=200, verbose_name="Наименование издательства")
+
+# class StringListField(forms.CharField):
+#   def prepare_value(self, value):
+#     return ', '.join(value)
+#
+#   def to_python(self, value):
+#     if not value:
+#       return []
+#     return [item.strip() for item in value.split(',')]
+
+@python_2_unicode_compatible
+class TeacherPlan(models.Model):
+  person_profile = models.ForeignKey(UserProfile)
+  start_year = models.SmallIntegerField("Год начала")
+
+  study_books = ListField(EmbeddedModelField("StudyBook"))
+  disciplines = ListField(EmbeddedModelField("AcademicDiscipline"))
+  NIRS = ListField(EmbeddedModelField("NIR"))
+  participations = ListField(EmbeddedModelField("Participation"))
+  publications = ListField(EmbeddedModelField("TeacherPublication"))
+  qualifications = ListField(EmbeddedModelField("Qualification"))
+  anotherworks = ListField(EmbeddedModelField("AnotherWork"))
+
+  def __src__(self):
+    return self.person_profile.first_name + " " + str(self.start_year) + '-' + str(self.start_year+1)

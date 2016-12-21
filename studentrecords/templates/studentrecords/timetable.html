@@ -1,218 +1,213 @@
-{% extends 'studentrecords/layout.html' %}
+{% extends 'layout.html' %}
 {% block title %}Расписание предметов{% endblock %}
 {% block pagename %}Расписание предметов{% endblock %}
 
 {% block content %}
 
-    <div class="modal-content" style="width: 70%; margin: 0 auto">
-        <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Фильтр</h4>
-        </div>
-
-        <div class="modal-body">
-            <form role="form">
-                <div class="form-group row">
-                    <label class="col-md-2" for="group">Группа</label>
-                    <div class="col-md-10">
-                        <input type="number" class="form-control" id="group" placeholder="Группа">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-default">Применить фильтр</button>
-                <button type="submit" class="btn btn-default">Экспорт данных</button>
-            </form>
-        </div>
+<div id="filter-box" class="filter-block clearfix">
+    <div class="form-group">
+        <input type="number" class="form-control" id="group" placeholder="Группа">
     </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <caption style="font-size: 2em">Группа 2304</caption>
-             <tr>
-                <th class="empty"></th>
-                <th class="empty"></th>
-                <th colspan="2" style="text-align: center">Понедельник</th>
-            </tr>
-            <tr>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="even-week">1 неделя</td>
-                <td class="odd-week">2 неделя</td>
-            </tr>
-            <tr>
-                <td class="number">3</td>
-                <td class="time">11:40</td>
-                <td>Разработка ЗП лаб. 3404</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td class="number">4</td>
-                <td class="time">13:45</td>
-                <td>Разработка ЗП лек. 3410</td>
-                <td>Разработка ЗП пр. 3410</td>
-            </tr>
-            <tr>
-                <td class="number">5</td>
-                <td class="time">15:35</td>
-                <td>Методы обр. дан. и ВР лаб. 3404</td>
-                <td>Методы обр. дан. и ВР лек. 1244</td>
-            </tr>
-            <tr>
-                <td class="number">6</td>
-                <td class="time">17:25</td>
-                <td></td>
-                <td>Методы обр. дан. и ВР пр. 3404</td>
-            </tr>
-            <tr>
-                <th class="empty"></th>
-                <th class="empty"></th>
-                <th colspan="2" style="text-align: center">Вторник</th>
-            </tr>
-            <tr>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="even-week">1 неделя</td>
-                <td class="odd-week">2 неделя</td>
-            </tr>
-            <tr>
-                <td class="number">4</td>
-                <td class="time">13:45</td>
-                <td colspan="2">Анализ, моделирование и опт. систем лаб. 3404</td>
-            </tr>
-            <tr>
-                <td class="number">5</td>
-                <td class="time">15:35</td>
-                <td>Ком-я рез. НИР лек. 3324</td>
-                <td>Ан. М. и опт. систем лек. 3425</td>
-            </tr>
-            <tr>
-                <td class="number">6</td>
-                <td class="time">17:25</td>
-                <td colspan="2">Коммерциализация результатов НИР пр. 2402</td>
-            </tr>
-            <tr>
-            <tr>
-                <th class="empty"></th>
-                <th class="empty"></th>
-                <th colspan="2" style="text-align: center">Четверг</th>
-            </tr>
-            <tr>
-                <td class="empty"></th>
-                <td class="empty"></th>
-                <td class="even-week">1 неделя</td>
-                <td class="odd-week">2 неделя</td>
-            </tr>
-            <tr>
-                <td class="number">2</td>
-                <td class="time">09:50</td>
-                <td></td>
-                <td>Комп. граф. лек. 5419</td>
-            </tr>
-            <tr>
-                <td class="number">3</td>
-                <td class="time">11:40</td>
-                <td colspan="2">Комп. граф. (лаб. + пр.) 3413</td>
-            </tr>
-            <tr>
-                <td class="number">4</td>
-                <td class="time">13:45</td>
-                <td colspan="2">Английский язык 3318</td>
-            </tr>
-        </table>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Применить фильтр</button>
+        <!--<button type="submit" class="btn btn-default">Экспорт данных</button>-->
     </div>
+</div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <caption style="font-size: 2em">Группа 2303</caption>
-             <tr>
-                <th class="empty"></th>
-                <th class="empty"></th>
-                <th colspan="2" style="text-align: center">Понедельник</th>
-            </tr>
-            <tr>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="even-week">1 неделя</td>
-                <td class="odd-week">2 неделя</td>
-            </tr>
-            <tr>
-                <td class="number">3</td>
-                <td class="time">11:40</td>
-                <td>Разработка ЗП лаб. 3404</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td class="number">4</td>
-                <td class="time">13:45</td>
-                <td>Разработка ЗП лек. 3410</td>
-                <td>Разработка ЗП пр. 3410</td>
-            </tr>
-            <tr>
-                <td class="number">5</td>
-                <td class="time">15:35</td>
-                <td>Методы обр. дан. и ВР лаб. 3404</td>
-                <td>Методы обр. дан. и ВР лек. 1244</td>
-            </tr>
-            <tr>
-                <td class="number">6</td>
-                <td class="time">17:25</td>
-                <td></td>
-                <td>Методы обр. дан. и ВР пр. 3404</td>
-            </tr>
-            <tr>
-                <th class="empty"></th>
-                <th class="empty"></th>
-                <th colspan="2" style="text-align: center">Вторник</th>
-            </tr>
-            <tr>
-                <td class="empty"></td>
-                <td class="empty"></td>
-                <td class="even-week">1 неделя</td>
-                <td class="odd-week">2 неделя</td>
-            </tr>
-            <tr>
-                <td class="number">4</td>
-                <td class="time">13:45</td>
-                <td colspan="2">Анализ, моделирование и опт. систем лаб. 3404</td>
-            </tr>
-            <tr>
-                <td class="number">5</td>
-                <td class="time">15:35</td>
-                <td>Ком-я рез. НИР лек. 3324</td>
-                <td>Ан. М. и опт. систем лек. 3425</td>
-            </tr>
-            <tr>
-                <td class="number">6</td>
-                <td class="time">17:25</td>
-                <td colspan="2">Коммерциализация результатов НИР пр. 2402</td>
-            </tr>
-            <tr>
-            <tr>
-                <th class="empty"></th>
-                <th class="empty"></th>
-                <th colspan="2" style="text-align: center">Четверг</th>
-            </tr>
-            <tr>
-                <td class="empty"></th>
-                <td class="empty"></th>
-                <td class="even-week">1 неделя</td>
-                <td class="odd-week">2 неделя</td>
-            </tr>
-            <tr>
-                <td class="number">2</td>
-                <td class="time">09:50</td>
-                <td></td>
-                <td>Комп. граф. лек. 5419</td>
-            </tr>
-            <tr>
-                <td class="number">3</td>
-                <td class="time">11:40</td>
-                <td colspan="2">Комп. граф. (лаб. + пр.) 3413</td>
-            </tr>
-            <tr>
-                <td class="number">4</td>
-                <td class="time">13:45</td>
-                <td colspan="2">Английский язык 3318</td>
-            </tr>
-        </table>
-    </div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <caption style="font-size: 2em">Группа 2304</caption>
+        <tr>
+            <th class="empty"></th>
+            <th class="empty"></th>
+            <th colspan="2" style="text-align: center">Понедельник</th>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="even-week">1 неделя</td>
+            <td class="odd-week">2 неделя</td>
+        </tr>
+        <tr>
+            <td class="number">3</td>
+            <td class="time">11:40</td>
+            <td>Разработка ЗП лаб. 3404</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="number">4</td>
+            <td class="time">13:45</td>
+            <td>Разработка ЗП лек. 3410</td>
+            <td>Разработка ЗП пр. 3410</td>
+        </tr>
+        <tr>
+            <td class="number">5</td>
+            <td class="time">15:35</td>
+            <td>Методы обр. дан. и ВР лаб. 3404</td>
+            <td>Методы обр. дан. и ВР лек. 1244</td>
+        </tr>
+        <tr>
+            <td class="number">6</td>
+            <td class="time">17:25</td>
+            <td></td>
+            <td>Методы обр. дан. и ВР пр. 3404</td>
+        </tr>
+        <tr>
+            <th class="empty"></th>
+            <th class="empty"></th>
+            <th colspan="2" style="text-align: center">Вторник</th>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="even-week">1 неделя</td>
+            <td class="odd-week">2 неделя</td>
+        </tr>
+        <tr>
+            <td class="number">4</td>
+            <td class="time">13:45</td>
+            <td colspan="2">Анализ, моделирование и опт. систем лаб. 3404</td>
+        </tr>
+        <tr>
+            <td class="number">5</td>
+            <td class="time">15:35</td>
+            <td>Ком-я рез. НИР лек. 3324</td>
+            <td>Ан. М. и опт. систем лек. 3425</td>
+        </tr>
+        <tr>
+            <td class="number">6</td>
+            <td class="time">17:25</td>
+            <td colspan="2">Коммерциализация результатов НИР пр. 2402</td>
+        </tr>
+        <tr>
+        <tr>
+            <th class="empty"></th>
+            <th class="empty"></th>
+            <th colspan="2" style="text-align: center">Четверг</th>
+        </tr>
+        <tr>
+            <td class="empty">
+            </th>
+            <td class="empty">
+            </th>
+            <td class="even-week">1 неделя</td>
+            <td class="odd-week">2 неделя</td>
+        </tr>
+        <tr>
+            <td class="number">2</td>
+            <td class="time">09:50</td>
+            <td></td>
+            <td>Комп. граф. лек. 5419</td>
+        </tr>
+        <tr>
+            <td class="number">3</td>
+            <td class="time">11:40</td>
+            <td colspan="2">Комп. граф. (лаб. + пр.) 3413</td>
+        </tr>
+        <tr>
+            <td class="number">4</td>
+            <td class="time">13:45</td>
+            <td colspan="2">Английский язык 3318</td>
+        </tr>
+    </table>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <caption style="font-size: 2em">Группа 2303</caption>
+        <tr>
+            <th class="empty"></th>
+            <th class="empty"></th>
+            <th colspan="2" style="text-align: center">Понедельник</th>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="even-week">1 неделя</td>
+            <td class="odd-week">2 неделя</td>
+        </tr>
+        <tr>
+            <td class="number">3</td>
+            <td class="time">11:40</td>
+            <td>Разработка ЗП лаб. 3404</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="number">4</td>
+            <td class="time">13:45</td>
+            <td>Разработка ЗП лек. 3410</td>
+            <td>Разработка ЗП пр. 3410</td>
+        </tr>
+        <tr>
+            <td class="number">5</td>
+            <td class="time">15:35</td>
+            <td>Методы обр. дан. и ВР лаб. 3404</td>
+            <td>Методы обр. дан. и ВР лек. 1244</td>
+        </tr>
+        <tr>
+            <td class="number">6</td>
+            <td class="time">17:25</td>
+            <td></td>
+            <td>Методы обр. дан. и ВР пр. 3404</td>
+        </tr>
+        <tr>
+            <th class="empty"></th>
+            <th class="empty"></th>
+            <th colspan="2" style="text-align: center">Вторник</th>
+        </tr>
+        <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="even-week">1 неделя</td>
+            <td class="odd-week">2 неделя</td>
+        </tr>
+        <tr>
+            <td class="number">4</td>
+            <td class="time">13:45</td>
+            <td colspan="2">Анализ, моделирование и опт. систем лаб. 3404</td>
+        </tr>
+        <tr>
+            <td class="number">5</td>
+            <td class="time">15:35</td>
+            <td>Ком-я рез. НИР лек. 3324</td>
+            <td>Ан. М. и опт. систем лек. 3425</td>
+        </tr>
+        <tr>
+            <td class="number">6</td>
+            <td class="time">17:25</td>
+            <td colspan="2">Коммерциализация результатов НИР пр. 2402</td>
+        </tr>
+        <tr>
+        <tr>
+            <th class="empty"></th>
+            <th class="empty"></th>
+            <th colspan="2" style="text-align: center">Четверг</th>
+        </tr>
+        <tr>
+            <td class="empty">
+            </th>
+            <td class="empty">
+            </th>
+            <td class="even-week">1 неделя</td>
+            <td class="odd-week">2 неделя</td>
+        </tr>
+        <tr>
+            <td class="number">2</td>
+            <td class="time">09:50</td>
+            <td></td>
+            <td>Комп. граф. лек. 5419</td>
+        </tr>
+        <tr>
+            <td class="number">3</td>
+            <td class="time">11:40</td>
+            <td colspan="2">Комп. граф. (лаб. + пр.) 3413</td>
+        </tr>
+        <tr>
+            <td class="number">4</td>
+            <td class="time">13:45</td>
+            <td colspan="2">Английский язык 3318</td>
+        </tr>
+    </table>
+</div>
 
 {% endblock %}
