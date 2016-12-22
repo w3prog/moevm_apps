@@ -15,6 +15,7 @@ from teacherPlan.forms import *
 from .pdf.pdf_generate import conclusion_to_pdf
 from moevmCommon.decorators import login_teacher_required
 
+@login_teacher_required(login_url="/teacherPlan/login")
 def index(request):
     return render(request, 'teacherPlan/index.html')
 

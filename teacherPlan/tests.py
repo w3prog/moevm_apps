@@ -19,6 +19,14 @@ class GetPagesTest(TestCase):
     response = c.get('/listOfPlans')
     self.assertEqual(response.status_code, 302)
 
+  def test_newPlan(self):
+    response = c.get('/makeNewPlan')
+    self.assertEqual(response.status_code, 302)
+
   def test_plan(self):
     response = c.get('/plan')
+    self.assertEqual(response.status_code, 302)
+
+  def test_simpleReport(self):
+    response = c.get('/managerReport')
     self.assertEqual(response.status_code, 302)
