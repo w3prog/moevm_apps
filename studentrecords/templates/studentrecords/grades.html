@@ -1,90 +1,177 @@
-{% extends 'studentrecords/layout.html' %}
+{% extends 'layout.html' %}
 {% block title %}Успеваемость{% endblock %}
 {% block pagename %}Успеваемость{% endblock %}
 
 {% block content %}
 
 <div id="filter-box" class="filter-block clearfix">
-    <div class="form-group">
-        <input type="text" class="form-control" id="last-name" placeholder="Предмет">
-    </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="number" class="form-control" id="group" placeholder="Группа">
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">Применить фильтр</button>
+    <div class="form-group field-container">
+        <button id="apply-grades-filter" type="submit" class="btn btn-default">Применить фильтр</button>
         <!--<button type="submit" class="btn btn-default">Экспорт данных</button>-->
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <caption style="font-size: 2em">Информатика</caption>
-        <tr>
-            <th>ФИО</th>
-            <th>Л. р. №1</th>
-            <th>Л. р. №2</th>
-            <th>Л. р. №3</th>
-            <th>Курсовой проект</th>
-            <th>Суммарный балл</th>
-        </tr>
-        {% for i in 'xxx' %}
-        <tr>
-            <td>Иванов И.</td>
-            <td>35</td>
-            <td>25</td>
-            <td>15</td>
-            <td>15</td>
-            <td><b>90</b></td>
-        </tr>
-        <tr>
-            <td>Петров П.</td>
-            <td>25</td>
-            <td>31</td>
-            <td>33</td>
-            <td>15</td>
-            <td><b>104</b></td>
-        </tr>
-        {% endfor %}
-    </table>
+<div class="panel panel-default filter grades-table" id="panel_filter_2304">
+    <div class="panel-heading">
+        <a data-toggle="collapse" data-parent="#panel_filter_2304" href="#collapseOne_2304" class="display-block-a">
+            <h3 js-key="study_group" js-value="2304" class="panel-title">2304</h3>
+        </a>
+    </div>
+
+    <div id="collapseOne_2304" class="panel-collapse collapse out">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption style="font-size: 2em">Информатика</caption>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Л. р. №1</th>
+                    <th>Л. р. №2</th>
+                    <th>Л. р. №3</th>
+                    <th>Курсовой проект</th>
+                    <th>Суммарный балл</th>
+                </tr>
+                {% for i in 'xxx' %}
+                <tr>
+                    <td>Иванов И.</td>
+                    <td>35</td>
+                    <td>25</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td><b>90</b></td>
+                </tr>
+                <tr>
+                    <td>Петров П.</td>
+                    <td>25</td>
+                    <td>31</td>
+                    <td>33</td>
+                    <td>15</td>
+                    <td><b>104</b></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption style="font-size: 2em">Программирование</caption>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Л. р. №1</th>
+                    <th>Л. р. №2</th>
+                    <th>Л. р. №3</th>
+                    <th>Л. р. №4</th>
+                    <th>Л. р. №5</th>
+                    <th>Курсовой проект</th>
+                    <th>Суммарный балл</th>
+                </tr>
+                {% for i in 'xxx' %}
+                <tr>
+                    <td>Иванов И.</td>
+                    <td>35</td>
+                    <td>25</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td><b>120</b></td>
+                </tr>
+                <tr>
+                    <td>Петров П.</td>
+                    <td>25</td>
+                    <td>31</td>
+                    <td>33</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td><b>134</b></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-hover">
-        <caption style="font-size: 2em">Программирование</caption>
-        <tr>
-            <th>ФИО</th>
-            <th>Л. р. №1</th>
-            <th>Л. р. №2</th>
-            <th>Л. р. №3</th>
-            <th>Л. р. №4</th>
-            <th>Л. р. №5</th>
-            <th>Курсовой проект</th>
-            <th>Суммарный балл</th>
-        </tr>
-        {% for i in 'xxx' %}
-        <tr>
-            <td>Иванов И.</td>
-            <td>35</td>
-            <td>25</td>
-            <td>15</td>
-            <td>15</td>
-            <td>15</td>
-            <td>15</td>
-            <td><b>120</b></td>
-        </tr>
-        <tr>
-            <td>Петров П.</td>
-            <td>25</td>
-            <td>31</td>
-            <td>33</td>
-            <td>15</td>
-            <td>15</td>
-            <td>15</td>
-            <td><b>134</b></td>
-        </tr>
-        {% endfor %}
-    </table>
+<div class="panel panel-default filter grades-table" id="panel_filter_2303">
+    <div class="panel-heading">
+        <a data-toggle="collapse" data-parent="#panel_filter_2304" href="#collapseOne_2303" class="display-block-a">
+            <h3 js-key="study_group" js-value="2303" class="panel-title">2303</h3>
+        </a>
+    </div>
+
+    <div id="collapseOne_2303" class="panel-collapse collapse out">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption style="font-size: 2em">Информатика</caption>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Л. р. №1</th>
+                    <th>Л. р. №2</th>
+                    <th>Л. р. №3</th>
+                    <th>Курсовой проект</th>
+                    <th>Суммарный балл</th>
+                </tr>
+                {% for i in 'xxx' %}
+                <tr>
+                    <td>Иванов И.</td>
+                    <td>35</td>
+                    <td>25</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td><b>90</b></td>
+                </tr>
+                <tr>
+                    <td>Петров П.</td>
+                    <td>25</td>
+                    <td>31</td>
+                    <td>33</td>
+                    <td>15</td>
+                    <td><b>104</b></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption style="font-size: 2em">Программирование</caption>
+                <tr>
+                    <th>ФИО</th>
+                    <th>Л. р. №1</th>
+                    <th>Л. р. №2</th>
+                    <th>Л. р. №3</th>
+                    <th>Л. р. №4</th>
+                    <th>Л. р. №5</th>
+                    <th>Курсовой проект</th>
+                    <th>Суммарный балл</th>
+                </tr>
+                {% for i in 'xxx' %}
+                <tr>
+                    <td>Иванов И.</td>
+                    <td>35</td>
+                    <td>25</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td><b>120</b></td>
+                </tr>
+                <tr>
+                    <td>Петров П.</td>
+                    <td>25</td>
+                    <td>31</td>
+                    <td>33</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td>15</td>
+                    <td><b>134</b></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
