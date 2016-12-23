@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'studentrecords/../layout.html' %}
 {% block title %}Посещаемость{% endblock %}
 {% block pagename %}Посещаемость{% endblock %}
 
@@ -37,7 +37,7 @@
                 </tr>
                 {% for record in attendance_item.attendance_records %}
                 <tr>
-                    <td>Иванов И. И.</td>
+                    <td>Студент0Фамиля Студент0Имя Студент1Отчество</td>
                     <td>
                         <span class="glyphicon glyphicon-ok" style="color: green"></span>
                     </td>
@@ -88,7 +88,7 @@
                 </tr>
                 {% for record in attendance_item.attendance_records %}
                 <tr>
-                    <td>Иванов И. И.</td>
+                    <td>Студент3Фамиля Студент3Имя Студент3Отчество</td>
                     <td>
                         <span class="glyphicon glyphicon-ok" style="color: green"></span>
                     </td>
