@@ -1,4 +1,4 @@
-{% extends 'studentrecords/layout.html' %}
+{% extends 'studentrecords/../layout.html' %}
 {% block title %}Студенты{% endblock %}
 {% block pagename %}Студенты{% endblock %}
 
@@ -6,28 +6,28 @@
 
 
 <div id="filter-box" class="filter-block clearfix">
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="text" class="form-control" id="last-name" placeholder="Фамилия">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="text" class="form-control" id="first-name" placeholder="Имя">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="text" class="form-control" id="patronymic" placeholder="Отчество">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="number" class="form-control" id="group" placeholder="Группа">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="email" class="form-control" id="e-mail" placeholder="E-mail">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="text" class="form-control" id="github" placeholder="Github">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <input type="text" class="form-control" id="stepic" placeholder="Stepic">
     </div>
-    <div class="form-group">
+    <div class="form-group field-container">
         <button id="apply-students-filter" type="button" class="btn btn-default">Применить фильтр</button>
         <!--<button type="button" class="btn btn-default">Экспорт данных</button>-->
     </div>
