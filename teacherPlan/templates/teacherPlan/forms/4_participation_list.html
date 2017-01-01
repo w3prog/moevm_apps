@@ -2,9 +2,15 @@
 {% block title %}Участие в конференциях и выставках{% endblock %}
 {% block pagename %}Участие в конференциях и выставках{% endblock %}
 {% block content %}
+    <a type="button" href="{% url 'tpplan' planid %}">Назад к плану</a>
+        {% if form.errors %}
+        <p class="bg-danger text-danger">
+            Ошибка при заполнении формы.
+        </p>
+    {% endif %}
 
-    <table class="table table-bordered">
     {% if participations %}
+        <table class="table table-bordered">
         <tr>
             <th>Дата</th>
             <th>Наименование конференции или выставки</th>
@@ -18,9 +24,7 @@
                 <td>{{ participation.date }}</td>
             </tr>
         {% endfor %}
-
-
-    </table>
+        </table>
     {% endif %}
 
     <form action="#" method="post">
@@ -28,5 +32,6 @@
         {{ form.as_p }}
         <input type="submit" value="Добавить">
     </form>
-
+    <br>
+    <a type="button" class="btn btn-primary" href="{% url 'tpplan' planid %}">Назад к плану</a>
 {% endblock %}

@@ -34,7 +34,7 @@ def loginTeacher(request):
                 return HttpResponseRedirect('/teacherPlan/loginwitherror')
         else:
             print "Некорректные данные: Логин {0}, Пароль {1}".format(username, password)
-            return HttpResponseRedirect('/loginwitherror')
+            return HttpResponseRedirect('/teacherPlan/loginwitherror')
     return render(request, 'teacherPlan/login.html')
 
 def errorLoginTeacher(request):
@@ -121,10 +121,10 @@ def studybookList(request, id=1):
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = StudyBookForm
     if request.method == 'POST':
         form = StudyBookForm(request.POST)
         if form.is_valid():
-            print "yes"
             newdisc = StudyBook.objects.create(
                 name=request.POST['name'],
                 type=request.POST['type'],
@@ -132,15 +132,19 @@ def studybookList(request, id=1):
                 vulture=request.POST['vulture'],
                 finishDate=request.POST['finishDate'],
             )
-
             tp.study_books =  tp.study_books + [newdisc]
             tp.save()
-
-        return HttpResponseRedirect('/teacherPlan/studybookList/' + tp.id)
-    else:
-        books = tp.study_books
-        print books
-        return render(request, 'teacherPlan/forms/1_studybook_list.html', {'form': StudyBookForm,'books':books})
+            return HttpResponseRedirect('/teacherPlan/studybookList/' + tp.id)
+    books = tp.study_books
+    return render(
+            request,
+            'teacherPlan/forms/1_studybook_list.html',
+            {
+                'form': form,
+                'books':books,
+                'planid':tp.id
+            }
+        )
 
 @login_teacher_required(login_url="/teacherPlan/login")
 def disciplineList(request, id=1):
@@ -148,24 +152,28 @@ def disciplineList(request, id=1):
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = AcademicDisciplineForm
     if request.method == 'POST':
         form = AcademicDisciplineForm(request.POST)
         if form.is_valid():
             newdisc = AcademicDiscipline.objects.create(
                 name=request.POST['name'],
                 type=request.POST['type'],
-                characterUpdate=request.POST['characterUpdate'])
-
+                characterUpdate=request.POST['characterUpdate']
+            )
             tp.disciplines =  tp.disciplines + [newdisc]
             tp.save()
-
-        return HttpResponseRedirect('/teacherPlan/disciplineList/' + tp.id)
-    else:
-        disciplines = tp.disciplines
-    return render(request,
-                  'teacherPlan/forms/2_discipline_list.html',
-                  {'form':AcademicDisciplineForm,
-                   'disciplines':disciplines})
+            return HttpResponseRedirect('/teacherPlan/disciplineList/' + tp.id)
+    disciplines = tp.disciplines
+    return render(
+        request,
+        'teacherPlan/forms/2_discipline_list.html',
+        {
+            'form':form,
+            'disciplines':disciplines,
+            'planid': tp.id
+        }
+    )
 
 
 @login_teacher_required(login_url="/teacherPlan/login")
@@ -174,6 +182,7 @@ def scWorkList(request, id=1):
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = ScientificWorkForm
     if request.method == 'POST':
         form = ScientificWorkForm(request.POST)
         if form.is_valid():
@@ -185,12 +194,17 @@ def scWorkList(request, id=1):
             )
             tp.NIRS =  tp.NIRS + [newNIR]
             tp.save()
-
-        return HttpResponseRedirect('/teacherPlan/scWorkList/' + tp.id)
-    else:
-        nirs = tp.NIRS
-    return render(request, 'teacherPlan/forms/3_sc_work_list.html',
-                  {'form':ScientificWorkForm,'nirs':nirs})
+            return HttpResponseRedirect('/teacherPlan/scWorkList/' + tp.id)
+    nirs = tp.NIRS
+    return render(
+        request,
+        'teacherPlan/forms/3_sc_work_list.html',
+        {
+            'form':form,
+            'nirs':nirs,
+            'planid': tp.id
+        }
+    )
 
 @login_teacher_required(login_url="/teacherPlan/login")
 def participationList(request, id=1):
@@ -198,6 +212,7 @@ def participationList(request, id=1):
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = ParticipationForm
     if request.method == 'POST':
         form = ParticipationForm(request.POST)
         if form.is_valid():
@@ -209,12 +224,17 @@ def participationList(request, id=1):
             )
             tp.participations =  tp.participations + [newParticipation]
             tp.save()
-
-        return HttpResponseRedirect('/teacherPlan/participationList/' + tp.id)
-    else:
-        participations = tp.participations
-    return render(request, 'teacherPlan/forms/4_participation_list.html',
-                  {'form':ParticipationForm,'participations':participations})
+            return HttpResponseRedirect('/teacherPlan/participationList/' + tp.id)
+    participations = tp.participations
+    return render(
+        request,
+        'teacherPlan/forms/4_participation_list.html',
+        {
+            'form':form,
+            'participations':participations,
+            'planid': tp.id
+        }
+    )
 
 @login_teacher_required(login_url="/teacherPlan/login")
 def publicationList(request, id=1):
@@ -222,6 +242,7 @@ def publicationList(request, id=1):
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = PublicationForm
     if request.method == 'POST':
         form = PublicationForm(request.POST)
         if form.is_valid():
@@ -233,18 +254,25 @@ def publicationList(request, id=1):
             )
             tp.publications =  tp.publications + [newTeacherPublication]
             tp.save()
+            return HttpResponseRedirect('/teacherPlan/publicationList/' + tp.id)
+    publications = tp.publications
+    return render(
+        request,
+        'teacherPlan/forms/5_publication_list.html',
+        {
+            'form':form,
+            'publications':publications,
+            'planid': tp.id
+        }
+    )
 
-        return HttpResponseRedirect('/teacherPlan/publicationList/' + tp.id)
-    else:
-        publications = tp.publications
-    return render(request, 'teacherPlan/forms/5_publication_list.html',
-                  {'form':PublicationForm,'publications':publications})
 @login_teacher_required(login_url="/teacherPlan/login")
 def qualificationList(request, id=1):
     try:
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = QualificationForm
     if request.method == 'POST':
         form = QualificationForm(request.POST)
         if form.is_valid():
@@ -255,12 +283,17 @@ def qualificationList(request, id=1):
             )
             tp.qualifications =  tp.qualifications + [newdisc]
             tp.save()
-
-        return HttpResponseRedirect('/teacherPlan/qualificationList/' + tp.id)
-    else:
-        qualifications = tp.qualifications
-    return render(request, 'teacherPlan/forms/6_qualification_list.html',
-                  {'form':QualificationForm,'qualifications':qualifications})
+            return HttpResponseRedirect('/teacherPlan/qualificationList/' + tp.id)
+    qualifications = tp.qualifications
+    return render(
+        request,
+        'teacherPlan/forms/6_qualification_list.html',
+        {
+            'form':form,
+            'qualifications':qualifications,
+            'planid': tp.id
+        }
+    )
 
 @login_teacher_required(login_url="/teacherPlan/login")
 def difWorkList(request, id=1):
@@ -268,22 +301,26 @@ def difWorkList(request, id=1):
         tp = TeacherPlan.objects.get(id=id)
     except:
          raise Http404
+    form = AnotherWorkForm
     if request.method == 'POST':
         form = AnotherWorkForm(request.POST)
         if form.is_valid():
             newdisc = AnotherWork.objects.create(
                 work_date=request.POST['work_date'],
                 v_work=request.POST['v_work'])
-
             tp.anotherworks =  tp.anotherworks + [newdisc]
             tp.save()
-
         return HttpResponseRedirect('/teacherPlan/difWorkList/' + tp.id)
-    else:
-        anotherworks = tp.anotherworks
-    return render(request, 'teacherPlan/forms/7_dif_work_list.html',
-                  {'form':AnotherWorkForm,
-                  'anotherworks':anotherworks})
+    anotherworks = tp.anotherworks
+    return render(
+        request,
+        'teacherPlan/forms/7_dif_work_list.html',
+        {
+            'form':form,
+            'anotherworks':anotherworks,
+            'planid': tp.id
+        }
+    )
 
 ## END SECTION TP forms
 

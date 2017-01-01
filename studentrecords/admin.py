@@ -5,7 +5,6 @@ from django.contrib import admin
 # Подключаем наши модели в админку сайта
 
 # Указываем, что из scientificWork.models импортируем конкретную модель Test_collection
-from scientificWork.models import Publication, Participation, Rand
 from studentrecords.models import AttendanceRecord, TermProject, TimeTableDay, TimeTableRecord, Project, Grades, Lesson, \
   Lab, Attendance, TimeTable
 
