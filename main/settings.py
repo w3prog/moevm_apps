@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'teacherPlan',
     'faker',
     'scientificWork',
-     'studentrecords',
+    'studentrecords',
 ]
 
 MIDDLEWARE_CLASSES = (
@@ -114,3 +114,4 @@ LOGGING = {
         },
     }
 }
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
