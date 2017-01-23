@@ -1,0 +1,27 @@
+{% extends 'teacherPlan/pages/template.html' %}
+{% block title %}Редактирование сведений об участии в конкурсе{% endblock %}
+{% block pagename %}Редактирование сведений об участии в конкурсе{% endblock %}
+{% block content %}
+    <a type="button" href="{% url 'tpplan' planid %}">Назад к плану</a>
+    {% if form.errors %}
+        <p class="bg-danger text-danger">
+            Ошибка при заполнении формы.
+        </p>
+    {% endif %}
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        <p><label for="id_name">Наименование конференции:</label>
+            <input id="id_name" maxlength="200" name="name" type="text" value="{{ target.name }}"></p>
+        <p><label for="id_level">Уровень конференции:</label>
+            <input id="id_level" maxlength="200" name="level" type="text" value="{{ target.level }}"></p>
+        <p><label for="id_report">Наименование доклада:</label>
+            <input id="id_report" maxlength="200" name="report" type="text" value="{{ target.report }}"></p>
+        <p><label for="id_date">Дата:</label>
+            <input id="id_date" maxlength="30" name="date" type="text" value="{{ target.date }}"></p>
+        <input type="hidden" name="idlink" value="{{ idlink }}">
+        <input type="submit" value="Изменить">
+    </form>
+    <br>
+    <a type="button" class="btn btn-primary" href="{% url 'participationList' planid %}">Отмена</a>
+{% endblock %}

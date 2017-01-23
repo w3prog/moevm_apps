@@ -1,0 +1,29 @@
+{% extends 'teacherPlan/pages/template.html' %}
+{% block title %}Редактирование сведений об учебных материалах{% endblock %}
+{% block pagename %}Редактирование сведений об учебных материалах{% endblock %}
+{% block content %}
+    <a type="button" href="{% url 'tpplan' planid %}">Назад к плану</a>
+    {% if form.errors %}
+        <p class="bg-danger text-danger">
+            Ошибка при заполнении формы.
+        </p>
+    {% endif %}
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        <p><label for="id_name">Наименование:</label>
+            <input id="id_name" maxlength="200" name="name" type="text" value="{{ target.name }}"></p>
+        <p><label for="id_type">Вид издания:</label>
+            <input id="id_type" maxlength="200" name="type" type="text"  value="{{ target.type }}"></p>
+        <p><label for="id_volume">Объем в п.л.</label>
+            <input id="id_volume" min="0" name="volume" type="number"  value="{{ target.volume }}"></p>
+        <p><label for="id_vulture">Вид грифа:</label>
+            <input id="id_vulture" maxlength="200" name="vulture" type="text"  value="{{ target.vulture }}"></p>
+        <p><label for="id_finishDate">Срок сдачи рукописи:</label>
+            <input id="id_finishDate" min="0" name="finishDate" type="number" value="{{ target.finishDate }}"></p>
+        <input type="hidden" name="idlink" value="{{ idlink }}">
+        <input type="submit" value="Изменить">
+    </form>
+    <br>
+    <a type="button" class="btn btn-primary" href="{% url 'studybookList' planid %}">Отмена</a>
+{% endblock %}
