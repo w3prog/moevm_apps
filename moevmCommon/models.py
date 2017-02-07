@@ -214,6 +214,12 @@ ACADEMIC_STATE_CHOICES  = (
   ('s','Соискатель'),
   ('st','Стажер'),
 )
+RATE_CHOICES = (
+    ('1','0,25 ставки'),
+    ('2','0,5 ставки'),
+    ('3','0,75 ставки'),
+    ('4','1 ставки'),
+)
 
 @python_2_unicode_compatible
 class UserProfile(models.Model):
@@ -303,6 +309,14 @@ class UserProfile(models.Model):
     year_of_academic_status = models.DateField(
         null=True,
         verbose_name="Год получения учебного звания",
+        blank=True,
+    )
+
+    rate = models.CharField(
+        max_length=1,
+        choices=RATE_CHOICES,
+        null=True,
+        verbose_name="Ставка",
         blank=True,
     )
 
@@ -424,7 +438,7 @@ class StudyBook(models.Model):
     null=True,
     blank=True,
   )
-  volume = models.IntegerField(
+  volume = models.FloatField(
     verbose_name="Объем",
     null=True,
     blank=True,
@@ -547,7 +561,7 @@ class Participation(models.Model):
 class TeacherPublication(models.Model):
   name_work = models.CharField(max_length=200, verbose_name="Наименование работ")
   type = models.CharField(max_length=200, verbose_name="Вид публикации")
-  volume = models.IntegerField(verbose_name="Объем")
+  volume = models.FloatField(verbose_name="Объем")
   name_publisher = models.CharField(max_length=200, verbose_name="Наименование издательства")
   def __str__(self):
     name = ""

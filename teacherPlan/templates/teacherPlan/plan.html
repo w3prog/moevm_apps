@@ -16,7 +16,7 @@
     {% endif %}
 
     {% if not user_profile.patronymic == none %}
-        <p>Отчетство: {{ user_profile.patronymic }}</p>
+        <p>Отчество: {{ user_profile.patronymic }}</p>
     {% endif %}
 
     {% if not user_profile.birth_date == none %}
@@ -63,7 +63,7 @@
 
         </label><br>
         <label for="with_finish_page">С итоговой страницей
-            <input type="checkbox" name="with_the_cover_page">
+            <input type="checkbox" name="with_finish_page">
         </label><br>
         {% csrf_token %}
         <input type="submit" class="btn btn-info" value="Загрузить в PDF"></input>
