@@ -12,6 +12,7 @@ from django.contrib import auth
 import datetime
 from moevmCommon.models import UserProfile
 from teacherPlan.forms import *
+from teacherPlan.models import TeacherSettings
 from .pdf.pdf_generate import conclusion_to_pdf
 from moevmCommon.decorators import login_teacher_required
 from bson.objectid import ObjectId
@@ -53,17 +54,35 @@ def registerTeacher(request):
     if request.method == 'POST':
         form = RegisterTeacherForm(request.POST)
         if form.is_valid():
+            print "working"
+            print str(request.POST['birth_date_year'])
+            print str(request.POST['birth_date_month'])
+            print str(request.POST['birth_date_day'])
+            birth_date =  datetime.datetime(int(request.POST['birth_date_year']),
+                                            int(request.POST['birth_date_month']),
+                                            int(request.POST['birth_date_day'])
+                                         )
+            election_date =  datetime.datetime(int(request.POST['election_date_year']),
+                                            int(request.POST['election_date_month']),
+                                            int(request.POST['election_date_day'])
+                                         )
+            contract_date =  datetime.datetime(int(request.POST['contract_date_year']),
+                                            int(request.POST['contract_date_month']),
+                                            int(request.POST['contract_date_day'])
+                                         )
+            #todo добавить ставку в модель.
+
             UserProfile.objects.create_teacher(
                 username=request.POST['username'],
                 email=request.POST['email'],
                 password=request.POST['password'],
                 first_name=request.POST['first_name'],
                 last_name=request.POST['last_name'],
-                birth_date=request.POST['birth_date'],
                 patronymic=request.POST['patronymic'],
-                election_date=request.POST['election_date'],
+                birth_date=birth_date,
+                election_date=election_date,
                 position=request.POST['position'],
-                contract_date=request.POST['contract_date'],
+                contract_date=contract_date,
                 academic_degree=request.POST['academic_degree'],
                 year_of_academic_degree=request.POST['year_of_academic_degree'],
                 academic_status=request.POST['academic_status'],
@@ -72,13 +91,172 @@ def registerTeacher(request):
                 github_id=request.POST['github_id'],
                 stepic_id=request.POST['stepic_id'],
             )
-            return HttpResponseRedirect('/registerTeacher')
-        return HttpResponseRedirect('/registerTeacher')
+
+            return HttpResponseRedirect('/teacherPlan/registerTeacher')
+        return HttpResponseRedirect('/teacherPlan/registerTeacher')
 
     else:
         return render(request, 'teacherPlan/register_teacher.html', {'form':RegisterTeacherForm})
 
 
+@login_required(login_url="/teacherPlan/login")
+def makeNewPlan(request):
+    user_profile = UserProfile.get_profile_by_user(request.user)
+    form = MakeTeacherPlanFrom()
+    if request.method == 'POST':
+        form = MakeTeacherPlanFrom(request.POST)
+        if form.is_valid():
+            election_date = datetime.datetime(
+                int(request.POST['election_date_year']),
+                int(request.POST['election_date_month']),
+                int(request.POST['election_date_day'])
+            )
+            contract_date = datetime.datetime(
+                int(request.POST['contract_date_year']),
+                int(request.POST['contract_date_month']),
+                int(request.POST['contract_date_day'])
+            )
+            plan = TeacherPlan.objects.create(
+                person_profile=user_profile,
+                start_date=int(request.POST["start_date"]),
+                first_name=request.POST["first_name"],
+                last_name=request.POST["last_name"],
+                patronymic=request.POST["patronymic"],
+                department_name=request.POST["department_name"],
+                organisation_name=request.POST["organisation_name"],
+                department_head=request.POST["department_head"],
+                organisation_head=request.POST["organisation_head"],
+                election_date=election_date,
+                position=request.POST["position"],
+                contract_date=contract_date,
+                academic_degree=request.POST["academic_degree"],
+                year_of_academic_degree=request.POST["year_of_academic_degree"],
+                academic_status=request.POST["academic_status"],
+                year_of_academic_status=request.POST["year_of_academic_status"],
+                rate=str(request.POST["rate"]),
+            )
+            return HttpResponseRedirect('/teacherPlan/plan/' + plan.id)
+
+    form.fields["start_date"].initial = str(datetime.datetime.now().year)
+    if user_profile.first_name == None : user_profile.first_name=""
+    form.fields["first_name"].initial =unicode(user_profile.first_name)
+    if user_profile.last_name == None: user_profile.last_name = ""
+    form.fields["last_name"].initial = unicode(user_profile.last_name)
+    if user_profile.patronymic == None: user_profile.patronymic = ""
+    form.fields["patronymic"].initial = unicode(user_profile.patronymic)
+
+    if user_profile.position == None: user_profile.position = ""
+    form.fields["position"].initial = unicode(user_profile.position)
+    if user_profile.election_date == None: user_profile.election_date = ""
+    form.fields["election_date"].initial = unicode(user_profile.election_date)
+    if user_profile.academic_degree == None: user_profile.academic_degree = ""
+    form.fields["academic_degree"].initial = unicode(user_profile.academic_degree)
+
+    if user_profile.year_of_academic_degree == None: user_profile.year_of_academic_degree = 2000
+    form.fields["year_of_academic_degree"].initial = unicode(user_profile.year_of_academic_degree)
+    if user_profile.academic_status == None: user_profile.academic_status = ""
+    form.fields["academic_status"].initial = unicode(user_profile.academic_status)
+    if user_profile.year_of_academic_status == None: user_profile.year_of_academic_status = 2000
+    form.fields["year_of_academic_status"].initial = unicode(user_profile.year_of_academic_status)
+    if user_profile.rate == None: user_profile.rate = "1"
+    form.fields["rate"].initial = unicode(user_profile.rate)
+
+    departmentInfo = TeacherSettings.get()
+    form.fields["department_name"].initial = departmentInfo.department_name
+    form.fields["organisation_name"].initial = departmentInfo.organisation_name
+    form.fields["department_head"].initial = departmentInfo.department_head
+    form.fields["organisation_head"].initial = departmentInfo.organisation_head
+
+    return render(request, 'teacherPlan/forms/make_plan.html', {
+        'form': form,
+        'user_profile':user_profile.id,
+    })
+
+@login_required(login_url="/teacherPlan/login")
+def editPlan(request,id=1):
+    try:
+        tp = TeacherPlan.objects.get(id=id)
+    except:
+        raise Http404
+    form = MakeTeacherPlanFrom()
+    if request.method == 'POST':
+        form = MakeTeacherPlanFrom(request.POST)
+        if form.is_valid():
+            election_date = datetime.datetime(
+                int(request.POST['election_date_year']),
+                int(request.POST['election_date_month']),
+                int(request.POST['election_date_day'])
+            )
+            contract_date = datetime.datetime(
+                int(request.POST['contract_date_year']),
+                int(request.POST['contract_date_month']),
+                int(request.POST['contract_date_day'])
+            )
+            tp.start_date = int(request.POST["start_date"])
+            tp.first_name = request.POST["first_name"]
+            tp.last_name = request.POST["last_name"]
+            tp.patronymic = request.POST["patronymic"]
+            tp.department_name = request.POST["department_name"]
+            tp.organisation_name = request.POST["organisation_name"]
+            tp.department_head = request.POST["department_head"]
+            tp.organisation_head = request.POST["organisation_head"]
+            tp.election_date = election_date
+            tp.position = request.POST["position"]
+            tp.contract_date = contract_date
+            tp.academic_degree = request.POST["academic_degree"]
+            tp.year_of_academic_degree = request.POST["year_of_academic_degree"]
+            tp.academic_status = request.POST["academic_status"]
+            tp.year_of_academic_status = request.POST["year_of_academic_status"]
+            tp.rate = str(request.POST["rate"])
+
+            tp.save()
+            return HttpResponseRedirect('/teacherPlan/plan/' + tp.id)
+    form.fields["start_date"].initial = str(datetime.datetime.now().year)
+    if tp.first_name == None: tp.first_name = ""
+    form.fields["first_name"].initial = unicode(tp.first_name)
+    if tp.last_name == None: tp.last_name = ""
+    form.fields["last_name"].initial = unicode(tp.last_name)
+    if tp.patronymic == None: tp.patronymic = ""
+    form.fields["patronymic"].initial = unicode(tp.patronymic)
+
+    if tp.position == None: tp.position = ""
+    form.fields["position"].initial = unicode(tp.position)
+    if tp.election_date == None: tp.election_date = ""
+    form.fields["election_date"].initial = unicode(tp.election_date)
+    if tp.academic_degree == None: tp.academic_degree = ""
+    form.fields["academic_degree"].initial = unicode(tp.academic_degree)
+
+    if tp.year_of_academic_degree == None: tp.year_of_academic_degree = 2000
+    form.fields["year_of_academic_degree"].initial = unicode(tp.year_of_academic_degree)
+    if tp.academic_status == None: tp.academic_status = ""
+    form.fields["academic_status"].initial = unicode(tp.academic_status)
+    if tp.year_of_academic_status == None: tp.year_of_academic_status = 2000
+    form.fields["year_of_academic_status"].initial = unicode(tp.year_of_academic_status)
+    if tp.rate == None: tp.rate = "1"
+    form.fields["rate"].initial = unicode(tp.rate)
+
+    form.fields["department_name"].initial = tp.department_name
+    form.fields["organisation_name"].initial = tp.organisation_name
+    form.fields["department_head"].initial = tp.department_head
+    form.fields["organisation_head"].initial = tp.organisation_head
+    return render(request, 'teacherPlan/forms/edit_plan.html', {
+                           'plan': tp,
+                           'form': form,
+    })
+
+@login_required(login_url="/teacherPlan/login")
+def deletePlan(request,id=1):
+    try:
+        tp = TeacherPlan.objects.get(id=id)
+    except:
+        raise Http404
+    tp.delete()
+    return HttpResponseRedirect('/teacherPlan/')
+
+@login_required(login_url="/teacherPlan/login")
+def show_all_plan(request):
+    list = TeacherPlan.objects.all().filter()
+    return render(request, 'teacherPlan/full_plan_list.html', {'list': list})
 
 @login_teacher_required(login_url="/teacherPlan/login")
 def plan(request,id=1):
@@ -90,14 +268,17 @@ def plan(request,id=1):
 
 @login_teacher_required(login_url="/teacherPlan/login")
 def currentPlan(request):
-    year = datetime.datetime.now().year
-    month = datetime.datetime.now().month
+    year = int(datetime.datetime.now().year)
+    month = int(datetime.datetime.now().month)
     user_profile = UserProfile.get_profile_by_user(request.user)
     plan=None
-    if month < 8:
-        plan = TeacherPlan.objects.get_or_create(person_profile = user_profile, start_year = (year - 1))[0]
-    else :
-        plan = TeacherPlan.objects.get_or_create(person_profile = user_profile, start_year = year)[0]
+    try:
+        if month < 8:
+            plan = TeacherPlan.objects.get(person_profile = user_profile, start_date = (year - 1))[0]
+        else :
+            plan = TeacherPlan.objects.get(person_profile = user_profile, start_date = year)[0]
+    except :
+        return HttpResponseRedirect('/teacherPlan/plan/add/')
     return render(request, 'teacherPlan/plan.html',{'plan':plan,'user_profile':user_profile})
 
 @login_teacher_required(login_url="/teacherPlan/login")
@@ -129,7 +310,31 @@ def makePDF(request,id=1):
 
     return conclusion_to_pdf(response,id,has_cover_page,has_finish_page)
 
-##SECTION TP FROM
+
+def editPropertySite(request):
+    settings = TeacherSettings.get()
+    form = TeacherSettingsForm()
+    if request.method == "POST" :
+        form = TeacherSettingsForm(request.POST)
+        if form.is_valid():
+            settings.department_name = request.POST["department_name"]
+            settings.organisation_name = request.POST["organisation_name"]
+            settings.department_head = request.POST["department_head"]
+            settings.organisation_head = request.POST["organisation_head"]
+            settings.save()
+            return HttpResponseRedirect("/teacherPlan/")
+
+    form.fields["department_name"].initial = settings.department_name
+    form.fields["organisation_name"].initial = settings.organisation_name
+    form.fields["department_head"].initial = settings.department_head
+    form.fields["organisation_head"].initial = settings.organisation_head
+
+    return render(request, 'teacherPlan/forms/edit_settings.html', {
+                           'form': form,
+    })
+
+
+##SECTION TP FORMS
 @login_teacher_required(login_url="/teacherPlan/login")
 def studybook_list(request, id=1):
     try:

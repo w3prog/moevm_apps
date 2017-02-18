@@ -141,6 +141,7 @@ class UserProfileManager(models.Manager):
                        academic_status=None,
                        year_of_academic_status=None,
                        academic_state=None,
+                       rate=None,
                        github_id=None,
                        stepic_id=None,
                        **kwargs):
@@ -158,6 +159,7 @@ class UserProfileManager(models.Manager):
         github_id=github_id,
         stepic_id=stepic_id,
         position=position,
+        rate=rate,
         contract_date=contract_date,
         academic_degree=academic_degree,
         year_of_academic_degree=year_of_academic_degree,
@@ -209,16 +211,16 @@ ACADEMIC_DEGREE_CHOICES = (
   ('d','Доктор наук'),
 )
 ACADEMIC_STATE_CHOICES  = (
-  ('a','Аспирант'),
-  ('d','Докторант'),
-  ('s','Соискатель'),
-  ('st','Стажер'),
+  ('a', 'Аспирант'),
+  ('d', 'Докторант'),
+  ('s', 'Соискатель'),
+  ('st', 'Стажер'),
 )
 RATE_CHOICES = (
-    ('1','0,25 ставки'),
-    ('2','0,5 ставки'),
-    ('3','0,75 ставки'),
-    ('4','1 ставки'),
+    ('1', '0,25 ставки'),
+    ('2', '0,5 ставки'),
+    ('3', '0,75 ставки'),
+    ('4', '1 ставки'),
 )
 
 @python_2_unicode_compatible
@@ -280,8 +282,8 @@ class UserProfile(models.Model):
 
     contract_date = models.DateField(
         null=True,
-        verbose_name="Срок окончания трудового договора",
         blank=True,
+        verbose_name="Срок окончания трудового договора",
     )
 
     academic_degree = models.CharField(
@@ -292,7 +294,7 @@ class UserProfile(models.Model):
         blank=True,
     )
 
-    year_of_academic_degree = models.DateField(
+    year_of_academic_degree = models.IntegerField(
         null=True,
         verbose_name="Год присвоения ученой степени",
         blank=True,
@@ -306,7 +308,7 @@ class UserProfile(models.Model):
         blank=True,
     )
 
-    year_of_academic_status = models.DateField(
+    year_of_academic_status = models.IntegerField(
         null=True,
         verbose_name="Год получения учебного звания",
         blank=True,
@@ -351,12 +353,20 @@ class UserProfile(models.Model):
         return self.user.email
 
     @property
+    def short_FIO(self):
+        first_name = last_name = patronymic = ""
+        if not self.first_name == None: first_name = self.first_name
+        if not self.last_name == None: last_name = self.last_name
+        if not self.patronymic == None: patronymic = self.patronymic
+        return last_name + ' ' + first_name[0] + '.' + patronymic[0] + '.'
+
+    @property
     def FIO(self):
         first_name = last_name = patronymic = ""
         if not self.first_name == None: first_name = self.first_name
         if not self.last_name == None: last_name = self.last_name
         if not self.patronymic == None: patronymic = self.patronymic
-        return last_name + ' ' + first_name + ' ' +  patronymic
+        return u"" + last_name + ' ' + first_name + ' ' +  patronymic
 
     def __str__(self):
         print self.type.__str__()
@@ -614,7 +624,71 @@ class AnotherWork(models.Model):
 @python_2_unicode_compatible
 class TeacherPlan(models.Model):
   person_profile = models.ForeignKey(UserProfile)
-  start_year = models.SmallIntegerField("Год начала")
+  start_date = models.SmallIntegerField("Год начала")
+
+  first_name = models.CharField(verbose_name="Имя", max_length=30)
+  last_name = models.CharField(verbose_name="Фамилия", max_length=30)
+  patronymic = models.CharField(verbose_name="Отчество", max_length=30)
+
+  department_name = models.CharField(verbose_name= "Название кафедры",max_length=10)
+  organisation_name = models.CharField(verbose_name= "Название факультета",max_length=10)
+  department_head = models.CharField(verbose_name= "Заведующий кафедры",max_length=100)
+  organisation_head = models.CharField(verbose_name= "Декан",max_length=100)
+
+  election_date = models.DateField(
+      null=True,
+      verbose_name="Дата текущего избрания или зачисления на преподавательскую должность",
+      blank=True,
+  )
+
+  position = models.CharField(
+      max_length=40,
+      null=True,
+      verbose_name="Должность",
+      blank=True,
+  )
+
+  contract_date = models.DateField(
+      null=True,
+      verbose_name="Срок окончания трудового договора",
+      blank=True,
+  )
+
+  academic_degree = models.CharField(
+      max_length=1,
+      choices=ACADEMIC_DEGREE_CHOICES,
+      null=True,
+      verbose_name="Ученая степень",
+      blank=True,
+  )
+
+  year_of_academic_degree = models.IntegerField(
+      null=True,
+      verbose_name="Год присвоения ученой степени",
+      blank=True,
+  )
+
+  academic_status = models.CharField(
+      max_length=1,
+      choices=ACADEMIC_STATUS_CHOICES,
+      null=True,
+      verbose_name="Учебное звание",
+      blank=True,
+  )
+
+  year_of_academic_status = models.IntegerField(
+      null=True,
+      verbose_name="Год получения учебного звания",
+      blank=True,
+  )
+
+  rate = models.CharField(
+      max_length=1,
+      choices=RATE_CHOICES,
+      null=True,
+      verbose_name="Ставка",
+      blank=True,
+  )
 
   study_books = ListField(EmbeddedModelField("StudyBook"))
   disciplines = ListField(EmbeddedModelField("AcademicDiscipline"))
@@ -625,7 +699,12 @@ class TeacherPlan(models.Model):
   anotherworks = ListField(EmbeddedModelField("AnotherWork"))
 
   def __str__(self):
-    return unicode(self.person_profile.first_name + " " + str(self.start_year) + '-' + str(self.start_year+1))
+    return unicode(self.person_profile.FIO + " " +
+                   str(self.start_year) + '-' + str(self.start_year+1))
+
+  @property
+  def short_fio(self):
+      return u"%s" % self.person_profile.short_FIO
 
   class Meta:
     verbose_name = u"Учебный план"

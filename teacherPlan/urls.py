@@ -13,12 +13,21 @@ urlpatterns = patterns(
    url(r'^login$', loginTeacher, name='tplogin', ),
    url(r'^loginwitherror$', errorLoginTeacher, name='tploginwitherror', ),
    url(r'^logout$', logoutTeacher, name='tplogout', ),
+   url(r'^registerTeacher/', registerTeacher, name='registerTeacher' ),
+
+   #Property
+   url('^/', editPropertySite, name='editProperty'),
+
 
    #plans
    url(r'^listOfPlans$', listOfPlans, name='tpplanlist', ),
    url(r'^plan/(?P<id>[0-9a-z]+)$', plan, name='tpplan', ),
    url(r'^currentPlan/', currentPlan, name='currentPlan', ),
-   url(r'^registerTeacher/', registerTeacher,name='registerTeacher' ),
+   url(r'^plan/add/',makeNewPlan , name='addPlan'),
+   url(r'^plan/edit/(?P<id>[0-9a-z]+)$',editPlan , name='editPlan'),
+   url(r'^plan/deletePlan/(?P<id>[0-9a-z]+)$',deletePlan , name='deletePlan'),
+   url(r'^allplans/', show_all_plan, name='showAllPlans'),
+
 
 
    #forms_edit
@@ -38,8 +47,6 @@ urlpatterns = patterns(
    url(r'^publicationList/(?P<id>[0-9a-z]+)', publication_list, name='publicationList'),
    url(r'^qualificationList/(?P<id>[0-9a-z]+)', qualification_list, name='qualificationList'),
    url(r'^difWorkList/(?P<id>[0-9a-z]+)', dif_work_list, name='difWorkList'),
-
-
 
    url(r'^pdf/(?P<id>[0-9a-z]+)', makePDF, name='pdf'),
 )
