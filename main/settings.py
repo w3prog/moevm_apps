@@ -4,9 +4,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '5yse8pkk0u-y84#x0%hrz+8f&s^u(m3*rhvb%_5*z@%hodlx#='
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = False
 
+ALLOWED_HOSTS = [
+    'http://mse.moevm.info',
+    '127.0.0.1'
+]
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -124,3 +127,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
 )
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+TEMPLATE_DEBUG = DEBUG
