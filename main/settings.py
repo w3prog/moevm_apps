@@ -7,7 +7,7 @@ SECRET_KEY = '5yse8pkk0u-y84#x0%hrz+8f&s^u(m3*rhvb%_5*z@%hodlx#='
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'http://mse.moevm.info',
+    'mse.moevm.info',
     '127.0.0.1'
 ]
 ADMINS = (
